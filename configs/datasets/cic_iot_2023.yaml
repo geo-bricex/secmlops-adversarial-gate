@@ -1,0 +1,16 @@
+id: cic_iot_2023
+source_url: https://www.unb.ca/cic/datasets/iotdataset-2023.html
+download_url: https://cicresearch.ca/IOTDataset/CIC_IOT_Dataset2023/
+accessed: '2026-09-21'
+format: csv
+glob: '*.csv'
+target: label
+benign_labels: [BenignTraffic]
+sample_max_rows: 500000
+feature_policy:
+  binary: [fin_flag_number, syn_flag_number, rst_flag_number, psh_flag_number, ack_flag_number, ece_flag_number, cwr_flag_number, HTTP, HTTPS, DNS, Telnet, SMTP, SSH, IRC, TCP, UDP, DHCP, ARP, ICMP, IPv, LLC]
+  immutable: [Protocol Type]
+  derived: [Rate, Srate, Drate, Tot sum, Min, Max, AVG, Std, Tot size, Magnitue, Radius, Covariance, Variance, Weight]
+  mutable: [flow_duration, Header_Length, Duration, IAT, Number, ack_count, syn_count, fin_count, urg_count, rst_count]
+  discrete: [Header_Length, Duration, Number]
+

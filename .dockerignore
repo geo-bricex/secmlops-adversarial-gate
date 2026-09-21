@@ -1,0 +1,12 @@
+.git
+.pytest_cache
+__pycache__
+data
+results
+artifacts
+mlruns
+logs
+*.pt
+*.pth
+*.ckpt
+

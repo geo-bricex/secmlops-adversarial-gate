@@ -1,0 +1,16 @@
+id: ton_iot
+source_url: https://research.unsw.edu.au/projects/toniot-datasets
+download_url: https://unsw-my.sharepoint.com/
+accessed: '2026-09-21'
+format: csv
+glob: '*.csv'
+target: label
+benign_labels: [0, '0', normal, Normal]
+sample_max_rows: 500000
+feature_policy:
+  immutable: [ts, src_ip, dst_ip]
+  categorical: [proto, service, conn_state, type]
+  semantically_constrained: [src_port, dst_port]
+  mutable: []
+  note: Network data only; mutable features require inspection of the official processed network CSV.
+

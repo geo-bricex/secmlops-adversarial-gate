@@ -1,0 +1,8 @@
+policy_name: provisional_v1
+experimental_policy: true
+thresholds:
+  min_clean_f1: 0.90
+  min_clean_attack_recall: 0.90
+  min_adversarial_attack_recall: 0.70
+  max_relative_f1_drop: 0.20
+

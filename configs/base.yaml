@@ -1,0 +1,16 @@
+project: secmlops-adversarial-gate
+seed: 42
+splits:
+  train: 0.70
+  validation: 0.15
+  test: 0.15
+sampling:
+  strategy: stratified_random
+  max_rows: 500000
+  random_state: 42
+paths:
+  data: data
+  results: results
+  artifacts: artifacts
+  logs: logs
+

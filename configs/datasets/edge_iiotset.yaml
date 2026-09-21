@@ -1,0 +1,16 @@
+id: edge_iiotset
+source_url: https://doi.org/10.1109/ACCESS.2022.3165809
+download_url: https://www.kaggle.com/datasets/mohamedamineferrag/edgeiiotset-cyber-security-dataset-of-iot-iiot
+accessed: '2026-09-21'
+format: csv
+glob: 'DNN-EdgeIIoT-dataset.csv'
+target: Attack_type
+benign_labels: [Normal]
+sample_max_rows: 500000
+feature_policy:
+  immutable: [frame.time, ip.src_host, ip.dst_host, arp.src.proto_ipv4, arp.dst.proto_ipv4]
+  categorical: [http.request.method, http.referer, http.request.version]
+  semantically_constrained: [tcp.srcport, tcp.dstport, udp.port, mqtt.msg]
+  mutable: []
+  note: Mutable features intentionally unresolved pending inspection of the official CSV and domain review.
+

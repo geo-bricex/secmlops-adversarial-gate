@@ -1,0 +1,10 @@
+library: art
+attacks:
+  fgsm:
+    epsilon_levels: [0.01, 0.03, 0.05]
+  pgd:
+    epsilon_levels: [0.01, 0.03, 0.05]
+    step_size: 0.005
+    max_iterations: 20
+notes: Values are provisional experimental parameters in scaled feature space and require scientific review after profiling.
+
