@@ -1,8 +1,15 @@
-policy_name: provisional_v1
-experimental_policy: true
+policy_id: projected-evasion-ids-v1
+policy_version: '1.0'
 thresholds:
-  min_clean_f1: 0.90
-  min_clean_attack_recall: 0.90
-  min_adversarial_attack_recall: 0.70
-  max_relative_f1_drop: 0.20
-
+  clean_attack_recall_min: 0.95
+  robust_attack_recall_min: 0.80
+  attack_success_rate_max: 0.20
+  attack_recall_drop_max: 0.20
+integrity:
+  require_zero_semantic_violations: true
+  require_complete_adversarial_matrix: true
+  require_zero_fingerprint_overlap: true
+  block_confirmed_leakage: true
+aggregation:
+  robustness_mode: worst_case
+calibration_source: validation_only

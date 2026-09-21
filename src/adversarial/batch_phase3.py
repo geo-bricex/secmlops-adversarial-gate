@@ -12,7 +12,7 @@ def main():
     for budget in BUDGETS:
      started=time.time()
      try:
-      metric=run(dataset,seed,attack,budget); status='COMPLETED'; path=str(ROOT/'results/adversarial'/dataset/f'seed_{seed}'/attack/f'eps_{int(budget*100):03d}.json')
+      metric=run(dataset,seed,attack,budget,validation=True); status='COMPLETED'; path=str(ROOT/'results/adversarial'/dataset/f'seed_{seed}'/attack/'validation_sanity'/f'eps_{int(budget*100):03d}.json')
      except Exception as exc:
       metric={'error':repr(exc)}; status='FAILED'; path=''
      rows.append({'dataset':dataset,'seed':seed,'attack':attack,'budget':budget,'status':status,'runtime_seconds':time.time()-started,'artifact_path':path})

@@ -15,7 +15,7 @@
   "false_negative_rate": 0.03070175438596491,
   "dataset": "edge_iiotset",
   "seed": 42,
-  "attack": "FGSM",
+  "attack": "PGD",
   "budget": 0.01,
   "subset_N": 1024,
   "attack_success_rate": 0.03070175438596491,
@@ -29,9 +29,9 @@
   "mean_changed_features": 0.4453125,
   "projection_collapse_rate": 0.5546875,
   "semantic_constraint_violations": 0,
-  "attack_generation_seconds": 0.0027892589569091797,
-  "runtime_seconds": 0.0027892589569091797,
-  "adversarial_samples_per_second": 163484.28275921018,
+  "attack_generation_seconds": 0.01894855499267578,
+  "runtime_seconds": 0.01894855499267578,
+  "adversarial_samples_per_second": 24065.159595349538,
   "raw_attackable_features": [
     "udp.time_delta"
   ],
