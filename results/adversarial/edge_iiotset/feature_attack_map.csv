@@ -1,0 +1,23 @@
+raw_feature,semantic_type,predictive_status,adversarial_status,discrete,projection_rule,lower_bound,upper_bound,step,dependency_group,justification
+arp.opcode,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,2.0,,none,not independently attackable under conservative projected model
+arp.hw.size,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,6.0,,none,not independently attackable under conservative projected model
+http.content_length,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,0.0,,none,not independently attackable under conservative projected model
+http.response,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,1.0,,none,not independently attackable under conservative projected model
+tcp.connection.fin,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,1.0,,none,not independently attackable under conservative projected model
+tcp.connection.rst,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,1.0,,none,not independently attackable under conservative projected model
+tcp.len,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,992.0,,none,not independently attackable under conservative projected model
+tcp.srcport,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,9999.0,,none,not independently attackable under conservative projected model
+udp.port,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,68.0,,none,not independently attackable under conservative projected model
+udp.time_delta,numeric,PREDICTOR,CONDITIONALLY_MUTABLE_PROJECTABLE,False,clip_to_train_bounds,0.0,9e-05,,none,inter-packet timing is traffic-influenceable; no retained dependency is altered
+dns.qry.name.len,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,21.0,,none,not independently attackable under conservative projected model
+dns.qry.qu,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,0.0,,none,not independently attackable under conservative projected model
+mqtt.len,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,49.0,,none,not independently attackable under conservative projected model
+mqtt.msgtype,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,3.0,,none,not independently attackable under conservative projected model
+mqtt.proto_len,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,4.0,,none,not independently attackable under conservative projected model
+mqtt.topic_len,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,8.0,,none,not independently attackable under conservative projected model
+mqtt.ver,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,9.0,,none,not independently attackable under conservative projected model
+mbtcp.len,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,9999.0,,none,not independently attackable under conservative projected model
+http.request.method,categorical,PREDICTOR,IMMUTABLE,False,preserve_exactly,,,,none,not independently attackable under conservative projected model
+http.request.version,categorical,PREDICTOR,IMMUTABLE,False,preserve_exactly,,,,none,not independently attackable under conservative projected model
+tcp.flags,categorical,PREDICTOR,IMMUTABLE,False,preserve_exactly,,,,none,not independently attackable under conservative projected model
+mqtt.protoname,categorical,PREDICTOR,IMMUTABLE,False,preserve_exactly,,,,none,not independently attackable under conservative projected model

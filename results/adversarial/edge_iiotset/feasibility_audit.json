@@ -1,0 +1,16 @@
+{
+  "dataset": "edge_iiotset",
+  "total_predictive_features": 22,
+  "continuous_mutable": 0,
+  "discrete_mutable": 0,
+  "conditionally_mutable_projectable": 1,
+  "immutable": 21,
+  "attackable_total": 1,
+  "attackable_features": [
+    "udp.time_delta"
+  ],
+  "projection_rules": {
+    "udp.time_delta": "clip_to_train_bounds"
+  },
+  "threat_model": "PROJECTED_CONSTRAINED_TABULAR_EVASION"
+}

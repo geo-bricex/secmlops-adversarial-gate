@@ -1,0 +1,16 @@
+{
+  "dataset": "ton_iot",
+  "total_predictive_features": 20,
+  "continuous_mutable": 0,
+  "discrete_mutable": 0,
+  "conditionally_mutable_projectable": 1,
+  "immutable": 19,
+  "attackable_total": 1,
+  "attackable_features": [
+    "duration"
+  ],
+  "projection_rules": {
+    "duration": "clip_to_train_bounds"
+  },
+  "threat_model": "PROJECTED_CONSTRAINED_TABULAR_EVASION"
+}

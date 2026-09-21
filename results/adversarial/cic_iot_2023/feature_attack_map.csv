@@ -1,0 +1,33 @@
+raw_feature,semantic_type,predictive_status,adversarial_status,discrete,projection_rule,lower_bound,upper_bound,step,dependency_group,justification
+Header_Length,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,60.0,,none,not independently attackable under conservative projected model
+Time_To_Live,numeric,PREDICTOR,MUTABLE_DISCRETE,True,round_to_integer_and_train_bounds,0.0,255.0,1,none,integer TTL operationally controllable by packet construction
+Rate,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,4.03746893238292e-05,inf,,none,not independently attackable under conservative projected model
+ack_count,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,100.0,,none,not independently attackable under conservative projected model
+syn_count,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,100.0,,none,not independently attackable under conservative projected model
+fin_count,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,100.0,,none,not independently attackable under conservative projected model
+rst_count,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,100.0,,none,not independently attackable under conservative projected model
+Tot sum,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,60.0,265639.0,,none,not independently attackable under conservative projected model
+Min,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,42.0,4410.0,,none,not independently attackable under conservative projected model
+Max,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,52.0,33370.0,,none,not independently attackable under conservative projected model
+AVG,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,46.6,6002.2,,none,not independently attackable under conservative projected model
+Std,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,8732.876517950874,,none,not independently attackable under conservative projected model
+Tot size,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,46.6,6002.2,,none,not independently attackable under conservative projected model
+IAT,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,24767.995858597755,,none,not independently attackable under conservative projected model
+Number,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,1.0,100.0,,none,not independently attackable under conservative projected model
+Variance,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,76263132.27777778,,none,not independently attackable under conservative projected model
+fin_flag_number,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,1.0,,none,not independently attackable under conservative projected model
+syn_flag_number,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,1.0,,none,not independently attackable under conservative projected model
+rst_flag_number,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,1.0,,none,not independently attackable under conservative projected model
+psh_flag_number,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,1.0,,none,not independently attackable under conservative projected model
+ack_flag_number,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,1.0,,none,not independently attackable under conservative projected model
+HTTP,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,1.0,,none,not independently attackable under conservative projected model
+HTTPS,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,1.0,,none,not independently attackable under conservative projected model
+DNS,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,1.0,,none,not independently attackable under conservative projected model
+TCP,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,1.0,,none,not independently attackable under conservative projected model
+UDP,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,1.0,,none,not independently attackable under conservative projected model
+DHCP,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,0.5,,none,not independently attackable under conservative projected model
+ARP,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,1.0,,none,not independently attackable under conservative projected model
+ICMP,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,1.0,,none,not independently attackable under conservative projected model
+IPv,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,1.0,,none,not independently attackable under conservative projected model
+LLC,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,1.0,,none,not independently attackable under conservative projected model
+Protocol Type,categorical,PREDICTOR,IMMUTABLE,False,preserve_exactly,,,,none,not independently attackable under conservative projected model

@@ -1,0 +1,21 @@
+raw_feature,semantic_type,predictive_status,adversarial_status,discrete,projection_rule,lower_bound,upper_bound,step,dependency_group,justification
+src_port,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,1.0,65525.0,,none,not independently attackable under conservative projected model
+dst_port,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,65467.0,,none,not independently attackable under conservative projected model
+duration,numeric,PREDICTOR,CONDITIONALLY_MUTABLE_PROJECTABLE,False,clip_to_train_bounds,0.0,93516.92917,,none,flow duration is traffic-influenceable and directly projectable to nonnegative train domain
+src_bytes,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,1430385581.0,,none,not independently attackable under conservative projected model
+dst_bytes,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,3913853482.0,,none,not independently attackable under conservative projected model
+missed_bytes,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,359148034.0,,none,not independently attackable under conservative projected model
+src_pkts,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,24623.0,,none,not independently attackable under conservative projected model
+src_ip_bytes,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,6522626.0,,none,not independently attackable under conservative projected model
+dst_pkts,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,65690.0,,none,not independently attackable under conservative projected model
+dst_ip_bytes,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,86395523.0,,none,not independently attackable under conservative projected model
+dns_qclass,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,32769.0,,none,not independently attackable under conservative projected model
+dns_qtype,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,255.0,,none,not independently attackable under conservative projected model
+dns_rcode,numeric,PREDICTOR,IMMUTABLE,False,preserve_exactly,0.0,5.0,,none,not independently attackable under conservative projected model
+proto,categorical,PREDICTOR,IMMUTABLE,False,preserve_exactly,,,,none,not independently attackable under conservative projected model
+service,categorical,PREDICTOR,IMMUTABLE,False,preserve_exactly,,,,none,not independently attackable under conservative projected model
+conn_state,categorical,PREDICTOR,IMMUTABLE,False,preserve_exactly,,,,none,not independently attackable under conservative projected model
+dns_AA,categorical,PREDICTOR,IMMUTABLE,False,preserve_exactly,,,,none,not independently attackable under conservative projected model
+dns_RD,categorical,PREDICTOR,IMMUTABLE,False,preserve_exactly,,,,none,not independently attackable under conservative projected model
+dns_RA,categorical,PREDICTOR,IMMUTABLE,False,preserve_exactly,,,,none,not independently attackable under conservative projected model
+dns_rejected,categorical,PREDICTOR,IMMUTABLE,False,preserve_exactly,,,,none,not independently attackable under conservative projected model

@@ -1,0 +1,16 @@
+{
+  "dataset": "cic_iot_2023",
+  "total_predictive_features": 32,
+  "continuous_mutable": 0,
+  "discrete_mutable": 1,
+  "conditionally_mutable_projectable": 0,
+  "immutable": 31,
+  "attackable_total": 1,
+  "attackable_features": [
+    "Time_To_Live"
+  ],
+  "projection_rules": {
+    "Time_To_Live": "round_to_integer_and_train_bounds"
+  },
+  "threat_model": "PROJECTED_CONSTRAINED_TABULAR_EVASION"
+}
