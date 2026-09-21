@@ -1,0 +1,42 @@
+feature,dtype,semantic_type,adversarial_status,min,max,unique_values,constraints,reason
+Header_Length,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,0.0,60.0,5912,joint feasibility projection required,frozen conditional attack candidate
+Protocol Type,object,CATEGORICAL,IMMUTABLE,0.0,47.0,5,train vocabulary only,frozen categorical model feature
+Time_To_Live,object,CONTINUOUS_PRIMITIVE,MUTABLE,0.0,255.0,33419,"projection, observed train range and integer rule where applicable",frozen independently mutable model feature
+Rate,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,1.272070358718431e-05,15728640.0,962125,joint feasibility projection required,frozen conditional attack candidate
+fin_flag_number,object,BINARY,IMMUTABLE,0.0,1.0,492,observed binary domain,frozen binary model feature
+syn_flag_number,object,BINARY,IMMUTABLE,0.0,1.0,744,observed binary domain,frozen binary model feature
+rst_flag_number,object,BINARY,IMMUTABLE,0.0,1.0,860,observed binary domain,frozen binary model feature
+psh_flag_number,object,BINARY,IMMUTABLE,0.0,1.0,1158,observed binary domain,frozen binary model feature
+ack_flag_number,object,BINARY,IMMUTABLE,0.0,1.0,1649,observed binary domain,frozen binary model feature
+ece_flag_number,object,REMOVED,REMOVE,0.0,1.0,63,none,frozen exclusion from model X
+cwr_flag_number,object,REMOVED,REMOVE,0.0,1.0,44,none,frozen exclusion from model X
+ack_count,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,0.0,100.0,98,joint feasibility projection required,frozen conditional attack candidate
+syn_count,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,0.0,100.0,98,joint feasibility projection required,frozen conditional attack candidate
+fin_count,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,0.0,100.0,98,joint feasibility projection required,frozen conditional attack candidate
+rst_count,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,0.0,100.0,98,joint feasibility projection required,frozen conditional attack candidate
+HTTP,object,BINARY,IMMUTABLE,0.0,1.0,678,observed binary domain,frozen binary model feature
+HTTPS,object,BINARY,IMMUTABLE,0.0,1.0,931,observed binary domain,frozen binary model feature
+DNS,object,BINARY,IMMUTABLE,0.0,1.0,437,observed binary domain,frozen binary model feature
+Telnet,object,REMOVED,REMOVE,0.0,0.6,23,none,frozen exclusion from model X
+SMTP,object,REMOVED,REMOVE,0.0,0.9,21,none,frozen exclusion from model X
+SSH,object,REMOVED,REMOVE,0.0,1.0,74,none,frozen exclusion from model X
+IRC,object,REMOVED,REMOVE,0.0,0.9,34,none,frozen exclusion from model X
+TCP,object,BINARY,IMMUTABLE,0.0,1.0,1194,observed binary domain,frozen binary model feature
+UDP,object,BINARY,IMMUTABLE,0.0,1.0,1335,observed binary domain,frozen binary model feature
+DHCP,object,BINARY,IMMUTABLE,0.0,1.0,176,observed binary domain,frozen binary model feature
+ARP,object,BINARY,IMMUTABLE,0.0,1.0,505,observed binary domain,frozen binary model feature
+ICMP,object,BINARY,IMMUTABLE,0.0,1.0,1043,observed binary domain,frozen binary model feature
+IGMP,object,REMOVED,REMOVE,0.0,1.0,34,none,frozen exclusion from model X
+IPv,object,BINARY,IMMUTABLE,0.0,1.0,510,observed binary domain,frozen binary model feature
+LLC,object,BINARY,IMMUTABLE,0.0,1.0,510,observed binary domain,frozen binary model feature
+Tot sum,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,60.0,316492.0,115225,joint feasibility projection required,frozen conditional attack candidate
+Min,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,42.0,13583.0,1706,joint feasibility projection required,frozen conditional attack candidate
+Max,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,1.0,52194.0,7286,joint feasibility projection required,frozen conditional attack candidate
+AVG,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,46.0,13583.0,127955,joint feasibility projection required,frozen conditional attack candidate
+Std,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,0.0,11655.404669079491,2102410,joint feasibility projection required,frozen conditional attack candidate
+Tot size,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,46.0,13583.0,127955,joint feasibility projection required,frozen conditional attack candidate
+IAT,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,-0.0178179788589477,78612.00389949084,1222804,joint feasibility projection required,frozen conditional attack candidate
+Number,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,1.0,100.0,96,joint feasibility projection required,frozen conditional attack candidate
+Variance,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,0.0,135848458.0,3423386,joint feasibility projection required,frozen conditional attack candidate
+source_file,object,REMOVED,REMOVE,,,430,none,frozen exclusion from model X
+original_label,object,REMOVED,REMOVE,,,35,none,frozen exclusion from model X

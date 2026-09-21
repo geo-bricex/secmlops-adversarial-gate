@@ -1,0 +1,46 @@
+feature,dtype,semantic_type,adversarial_status,min,max,unique_values,constraints,reason
+src_ip,object,REMOVED,REMOVE,,,47,none,frozen exclusion from model X
+src_port,object,NUMERIC,IMMUTABLE,1.0,65528.0,26236,not in independent attack mask,frozen numeric model feature
+dst_ip,object,REMOVED,REMOVE,,,649,none,frozen exclusion from model X
+dst_port,object,NUMERIC,IMMUTABLE,0.0,65467.0,2193,not in independent attack mask,frozen numeric model feature
+proto,object,CATEGORICAL,IMMUTABLE,,,3,train vocabulary only,frozen categorical model feature
+service,object,CATEGORICAL,IMMUTABLE,,,10,train vocabulary only,frozen categorical model feature
+duration,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,0.0,93516.92917,69063,joint feasibility projection required,frozen conditional attack candidate
+src_bytes,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,0.0,3890855126.0,3078,joint feasibility projection required,frozen conditional attack candidate
+dst_bytes,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,0.0,3913853482.0,2481,joint feasibility projection required,frozen conditional attack candidate
+conn_state,object,CATEGORICAL,IMMUTABLE,,,13,train vocabulary only,frozen categorical model feature
+missed_bytes,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,0.0,1854527046.0,656,joint feasibility projection required,frozen conditional attack candidate
+src_pkts,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,0.0,24623.0,319,joint feasibility projection required,frozen conditional attack candidate
+src_ip_bytes,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,0.0,6522626.0,3984,joint feasibility projection required,frozen conditional attack candidate
+dst_pkts,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,0.0,121942.0,234,joint feasibility projection required,frozen conditional attack candidate
+dst_ip_bytes,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,0.0,86395523.0,3994,joint feasibility projection required,frozen conditional attack candidate
+dns_query,object,REMOVED,REMOVE,,,535,none,frozen exclusion from model X
+dns_qclass,object,NUMERIC,IMMUTABLE,0.0,32769.0,3,not in independent attack mask,frozen numeric model feature
+dns_qtype,object,NUMERIC,IMMUTABLE,0.0,255.0,10,not in independent attack mask,frozen numeric model feature
+dns_rcode,object,NUMERIC,IMMUTABLE,0.0,5.0,4,not in independent attack mask,frozen numeric model feature
+dns_AA,object,CATEGORICAL,IMMUTABLE,,,3,train vocabulary only,frozen categorical model feature
+dns_RD,object,CATEGORICAL,IMMUTABLE,,,3,train vocabulary only,frozen categorical model feature
+dns_RA,object,CATEGORICAL,IMMUTABLE,,,3,train vocabulary only,frozen categorical model feature
+dns_rejected,object,CATEGORICAL,IMMUTABLE,,,3,train vocabulary only,frozen categorical model feature
+ssl_version,object,REMOVED,REMOVE,,,4,none,frozen exclusion from model X
+ssl_cipher,object,REMOVED,REMOVE,,,6,none,frozen exclusion from model X
+ssl_resumed,object,REMOVED,REMOVE,,,3,none,frozen exclusion from model X
+ssl_established,object,REMOVED,REMOVE,,,3,none,frozen exclusion from model X
+ssl_subject,object,REMOVED,REMOVE,,,6,none,frozen exclusion from model X
+ssl_issuer,object,REMOVED,REMOVE,,,5,none,frozen exclusion from model X
+http_trans_depth,object,REMOVED,REMOVE,,,9,none,frozen exclusion from model X
+http_method,object,REMOVED,REMOVE,,,4,none,frozen exclusion from model X
+http_uri,object,REMOVED,REMOVE,,,88,none,frozen exclusion from model X
+http_version,object,REMOVED,REMOVE,,,2,none,frozen exclusion from model X
+http_request_body_len,object,REMOVED,REMOVE,0.0,2338.0,6,none,frozen exclusion from model X
+http_response_body_len,object,REMOVED,REMOVE,0.0,13424384.0,65,none,frozen exclusion from model X
+http_status_code,object,REMOVED,REMOVE,0.0,404.0,9,none,frozen exclusion from model X
+http_user_agent,object,REMOVED,REMOVE,,,36,none,frozen exclusion from model X
+http_orig_mime_types,object,REMOVED,REMOVE,,,3,none,frozen exclusion from model X
+http_resp_mime_types,object,REMOVED,REMOVE,,,11,none,frozen exclusion from model X
+weird_name,object,REMOVED,REMOVE,,,12,none,frozen exclusion from model X
+weird_addl,object,REMOVED,REMOVE,,,3,none,frozen exclusion from model X
+weird_notice,object,REMOVED,REMOVE,,,2,none,frozen exclusion from model X
+label,object,REMOVED,REMOVE,0.0,1.0,2,none,frozen exclusion from model X
+type,object,REMOVED,REMOVE,,,11,none,frozen exclusion from model X
+source_file,object,REMOVED,REMOVE,,,1,none,frozen exclusion from model X

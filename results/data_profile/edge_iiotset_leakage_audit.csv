@@ -1,0 +1,65 @@
+feature,dtype,cardinality,decision,risk,reason
+frame.time,object,24098505,REMOVE,HIGH,frozen exclusion from model X
+ip.src_host,object,4934364,REMOVE,HIGH,frozen exclusion from model X
+ip.dst_host,object,1829985,REMOVE,HIGH,frozen exclusion from model X
+arp.dst.proto_ipv4,object,30,REMOVE,HIGH,frozen exclusion from model X
+arp.opcode,object,9,KEEP,LOW,frozen numeric model feature
+arp.hw.size,object,11,KEEP,LOW,frozen numeric model feature
+arp.src.proto_ipv4,object,28,REMOVE,HIGH,frozen exclusion from model X
+icmp.checksum,object,57918,REMOVE,HIGH,frozen exclusion from model X
+icmp.seq_le,object,137549,REMOVE,HIGH,frozen exclusion from model X
+icmp.transmit_timestamp,object,75,REMOVE,HIGH,frozen exclusion from model X
+icmp.unused,object,1,REMOVE,HIGH,frozen exclusion from model X
+http.file_data,object,46256,REMOVE,HIGH,frozen exclusion from model X
+http.content_length,object,48,REVIEW,MEDIUM,frozen conditional attack candidate
+http.request.uri.query,object,5738,REMOVE,HIGH,frozen exclusion from model X
+http.request.method,object,10,KEEP,LOW,frozen categorical model feature
+http.referer,object,5,REMOVE,HIGH,frozen exclusion from model X
+http.request.full_uri,object,12521,REMOVE,HIGH,frozen exclusion from model X
+http.request.version,object,12,KEEP,LOW,frozen categorical model feature
+http.response,object,2,KEEP,LOW,frozen numeric model feature
+http.tls_port,object,97500,REMOVE,HIGH,frozen exclusion from model X
+tcp.ack,object,1476723,REMOVE,HIGH,frozen exclusion from model X
+tcp.ack_raw,object,6648421,REMOVE,HIGH,frozen exclusion from model X
+tcp.checksum,object,57918,REMOVE,HIGH,frozen exclusion from model X
+tcp.connection.fin,object,4,KEEP,LOW,frozen numeric model feature
+tcp.connection.rst,object,2,KEEP,LOW,frozen numeric model feature
+tcp.connection.syn,object,3,REMOVE,HIGH,not selected in the frozen model feature set
+tcp.connection.synack,object,166,REMOVE,HIGH,not selected in the frozen model feature set
+tcp.dstport,object,71597,KEEP,LOW,frozen numeric model feature
+tcp.flags,object,12,KEEP,LOW,frozen categorical model feature
+tcp.flags.ack,object,592,REMOVE,HIGH,not selected in the frozen model feature set
+tcp.len,object,1213,REVIEW,MEDIUM,frozen conditional attack candidate
+tcp.options,object,1584739,REMOVE,HIGH,frozen exclusion from model X
+tcp.payload,object,493338,REMOVE,HIGH,frozen exclusion from model X
+tcp.seq,object,222825,REMOVE,HIGH,frozen exclusion from model X
+tcp.srcport,object,71597,KEEP,LOW,frozen numeric model feature
+udp.port,object,628,KEEP,LOW,frozen numeric model feature
+udp.stream,object,2903621,REMOVE,HIGH,frozen exclusion from model X
+udp.time_delta,object,1269,REVIEW,MEDIUM,frozen conditional attack candidate
+dns.qry.name,object,291935,REMOVE,HIGH,frozen exclusion from model X
+dns.qry.name.len,object,17,REVIEW,MEDIUM,frozen conditional attack candidate
+dns.qry.qu,object,86,KEEP,LOW,frozen numeric model feature
+dns.qry.type,object,7,REMOVE,HIGH,frozen exclusion from model X
+dns.retransmission,object,7,REMOVE,HIGH,frozen exclusion from model X
+dns.retransmit_request,object,2,REMOVE,HIGH,frozen exclusion from model X
+dns.retransmit_request_in,object,6,REMOVE,HIGH,frozen exclusion from model X
+mqtt.conack.flags,object,14,REMOVE,HIGH,not selected in the frozen model feature set
+mqtt.conflag.cleansess,object,3,REMOVE,HIGH,not selected in the frozen model feature set
+mqtt.conflags,object,3,REMOVE,HIGH,not selected in the frozen model feature set
+mqtt.hdrflags,object,6,REMOVE,HIGH,not selected in the frozen model feature set
+mqtt.len,object,48,REVIEW,MEDIUM,frozen conditional attack candidate
+mqtt.msg_decoded_as,object,2,REMOVE,HIGH,frozen exclusion from model X
+mqtt.msg,object,1475,REMOVE,HIGH,frozen exclusion from model X
+mqtt.msgtype,object,5,KEEP,LOW,frozen numeric model feature
+mqtt.proto_len,object,5,KEEP,LOW,frozen numeric model feature
+mqtt.protoname,object,4,KEEP,LOW,frozen categorical model feature
+mqtt.topic,object,12,REMOVE,HIGH,frozen exclusion from model X
+mqtt.topic_len,object,7,KEEP,LOW,frozen numeric model feature
+mqtt.ver,object,21,KEEP,LOW,frozen numeric model feature
+mbtcp.len,object,52277,REVIEW,MEDIUM,frozen conditional attack candidate
+mbtcp.trans_id,object,161,REMOVE,HIGH,frozen exclusion from model X
+mbtcp.unit_id,object,6,REMOVE,HIGH,frozen exclusion from model X
+Attack_label,object,2,REMOVE,HIGH,frozen exclusion from model X
+Attack_type,object,17,REMOVE,HIGH,frozen exclusion from model X
+source_file,object,21,REMOVE,HIGH,frozen exclusion from model X

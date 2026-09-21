@@ -1,0 +1,65 @@
+feature,dtype,semantic_type,adversarial_status,min,max,unique_values,constraints,reason
+frame.time,object,REMOVED,REMOVE,,,24098505,none,frozen exclusion from model X
+ip.src_host,object,REMOVED,REMOVE,,,4934364,none,frozen exclusion from model X
+ip.dst_host,object,REMOVED,REMOVE,,,1829985,none,frozen exclusion from model X
+arp.dst.proto_ipv4,object,REMOVED,REMOVE,,,30,none,frozen exclusion from model X
+arp.opcode,object,NUMERIC,IMMUTABLE,0.0,6.0,9,not in independent attack mask,frozen numeric model feature
+arp.hw.size,object,NUMERIC,IMMUTABLE,0.0,6.0,11,not in independent attack mask,frozen numeric model feature
+arp.src.proto_ipv4,object,REMOVED,REMOVE,,,28,none,frozen exclusion from model X
+icmp.checksum,object,REMOVED,REMOVE,0.0,0.0,57918,none,frozen exclusion from model X
+icmp.seq_le,object,REMOVED,REMOVE,0.0,65535.0,137549,none,frozen exclusion from model X
+icmp.transmit_timestamp,object,REMOVED,REMOVE,0.0,77289023.0,75,none,frozen exclusion from model X
+icmp.unused,object,REMOVED,REMOVE,0.0,0.0,1,none,frozen exclusion from model X
+http.file_data,object,REMOVED,REMOVE,,,46256,none,frozen exclusion from model X
+http.content_length,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,0.0,83655.0,48,joint feasibility projection required,frozen conditional attack candidate
+http.request.uri.query,object,REMOVED,REMOVE,,,5738,none,frozen exclusion from model X
+http.request.method,object,CATEGORICAL,IMMUTABLE,,,10,train vocabulary only,frozen categorical model feature
+http.referer,object,REMOVED,REMOVE,,,5,none,frozen exclusion from model X
+http.request.full_uri,object,REMOVED,REMOVE,,,12521,none,frozen exclusion from model X
+http.request.version,object,CATEGORICAL,IMMUTABLE,,,12,train vocabulary only,frozen categorical model feature
+http.response,object,NUMERIC,IMMUTABLE,0.0,1.0,2,not in independent attack mask,frozen numeric model feature
+http.tls_port,object,REMOVED,REMOVE,0.0,6950071.0,97500,none,frozen exclusion from model X
+tcp.ack,object,REMOVED,REMOVE,0.0,4283119198.0,1476723,none,frozen exclusion from model X
+tcp.ack_raw,object,REMOVED,REMOVE,0.0,4294964985.0,6648421,none,frozen exclusion from model X
+tcp.checksum,object,REMOVED,REMOVE,,,57918,none,frozen exclusion from model X
+tcp.connection.fin,object,NUMERIC,IMMUTABLE,0.0,1.0,4,not in independent attack mask,frozen numeric model feature
+tcp.connection.rst,object,NUMERIC,IMMUTABLE,0.0,1.0,2,not in independent attack mask,frozen numeric model feature
+tcp.connection.syn,object,REMOVED,REMOVE,0.0,1440.0,3,none,not selected in the frozen model feature set
+tcp.connection.synack,object,REMOVED,REMOVE,0.0,64666.0,166,none,not selected in the frozen model feature set
+tcp.dstport,object,NUMERIC,IMMUTABLE,0.0,65535.0,71597,not in independent attack mask,frozen numeric model feature
+tcp.flags,object,CATEGORICAL,IMMUTABLE,,,12,train vocabulary only,frozen categorical model feature
+tcp.flags.ack,object,REMOVED,REMOVE,0.0,5900.0,592,none,not selected in the frozen model feature set
+tcp.len,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,0.0,65228.0,1213,joint feasibility projection required,frozen conditional attack candidate
+tcp.options,object,REMOVED,REMOVE,,,1584739,none,frozen exclusion from model X
+tcp.payload,object,REMOVED,REMOVE,,,493338,none,frozen exclusion from model X
+tcp.seq,object,REMOVED,REMOVE,0.0,4294967019.0,222825,none,frozen exclusion from model X
+tcp.srcport,object,NUMERIC,IMMUTABLE,0.0,65535.0,71597,not in independent attack mask,frozen numeric model feature
+udp.port,object,NUMERIC,IMMUTABLE,0.0,63894.0,628,not in independent attack mask,frozen numeric model feature
+udp.stream,object,REMOVED,REMOVE,0.0,2898793.0,2903621,none,frozen exclusion from model X
+udp.time_delta,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,0.0,52570.0,1269,joint feasibility projection required,frozen conditional attack candidate
+dns.qry.name,object,REMOVED,REMOVE,,,291935,none,frozen exclusion from model X
+dns.qry.name.len,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,0.0,245.0,17,joint feasibility projection required,frozen conditional attack candidate
+dns.qry.qu,object,NUMERIC,IMMUTABLE,0.0,1028.0,86,not in independent attack mask,frozen numeric model feature
+dns.qry.type,object,REMOVED,REMOVE,0.0,37.0,7,none,frozen exclusion from model X
+dns.retransmission,object,REMOVED,REMOVE,0.0,28.0,7,none,frozen exclusion from model X
+dns.retransmit_request,object,REMOVED,REMOVE,0.0,1.0,2,none,frozen exclusion from model X
+dns.retransmit_request_in,object,REMOVED,REMOVE,0.0,146276.0,6,none,frozen exclusion from model X
+mqtt.conack.flags,object,REMOVED,REMOVE,0.0,1574359.0,14,none,not selected in the frozen model feature set
+mqtt.conflag.cleansess,object,REMOVED,REMOVE,0.0,12.0,3,none,not selected in the frozen model feature set
+mqtt.conflags,object,REMOVED,REMOVE,0.0,0.0,3,none,not selected in the frozen model feature set
+mqtt.hdrflags,object,REMOVED,REMOVE,0.0,0.0,6,none,not selected in the frozen model feature set
+mqtt.len,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,0.0,49.0,48,joint feasibility projection required,frozen conditional attack candidate
+mqtt.msg_decoded_as,object,REMOVED,REMOVE,,,2,none,frozen exclusion from model X
+mqtt.msg,object,REMOVED,REMOVE,,,1475,none,frozen exclusion from model X
+mqtt.msgtype,object,NUMERIC,IMMUTABLE,0.0,14.0,5,not in independent attack mask,frozen numeric model feature
+mqtt.proto_len,object,NUMERIC,IMMUTABLE,0.0,4.0,5,not in independent attack mask,frozen numeric model feature
+mqtt.protoname,object,CATEGORICAL,IMMUTABLE,,,4,train vocabulary only,frozen categorical model feature
+mqtt.topic,object,REMOVED,REMOVE,,,12,none,frozen exclusion from model X
+mqtt.topic_len,object,NUMERIC,IMMUTABLE,0.0,24.0,7,not in independent attack mask,frozen numeric model feature
+mqtt.ver,object,NUMERIC,IMMUTABLE,0.0,187.0,21,not in independent attack mask,frozen numeric model feature
+mbtcp.len,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,0.0,48900.0,52277,joint feasibility projection required,frozen conditional attack candidate
+mbtcp.trans_id,object,REMOVED,REMOVE,0.0,151.0,161,none,frozen exclusion from model X
+mbtcp.unit_id,object,REMOVED,REMOVE,0.0,6.0,6,none,frozen exclusion from model X
+Attack_label,object,REMOVED,REMOVE,0.0,1.0,2,none,frozen exclusion from model X
+Attack_type,object,REMOVED,REMOVE,,,17,none,frozen exclusion from model X
+source_file,object,REMOVED,REMOVE,,,21,none,frozen exclusion from model X

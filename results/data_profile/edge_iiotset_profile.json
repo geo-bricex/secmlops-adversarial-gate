@@ -1,0 +1,257 @@
+{
+  "dataset": "edge_iiotset",
+  "selected_files": [
+    "Attack traffic/Backdoor_attack.csv",
+    "Attack traffic/DDoS_HTTP_Flood_attack.csv",
+    "Attack traffic/DDoS_ICMP_Flood_attack.csv",
+    "Attack traffic/DDoS_TCP_SYN_Flood_attack.csv",
+    "Attack traffic/DDoS_UDP_Flood_attack.csv",
+    "Attack traffic/MITM_attack.csv",
+    "Attack traffic/OS_Fingerprinting_attack.csv",
+    "Attack traffic/Password_attack.csv",
+    "Attack traffic/Port_Scanning_attack.csv",
+    "Attack traffic/Ransomware_attack.csv",
+    "Attack traffic/SQL_injection_attack.csv",
+    "Attack traffic/Uploading_attack.csv",
+    "Attack traffic/Vulnerability_scanner_attack.csv",
+    "Attack traffic/XSS_attack.csv",
+    "Normal traffic/Distance/Distance.csv",
+    "Normal traffic/Flame_Sensor/Flame_Sensor.csv",
+    "Normal traffic/Heart_Rate/Heart_Rate.csv",
+    "Normal traffic/IR_Receiver/IR_Receiver.csv",
+    "Normal traffic/Modbus/Modbus.csv",
+    "Normal traffic/Soil_Moisture/Soil_Moisture.csv",
+    "Normal traffic/Sound_Sensor/Sound_Sensor.csv",
+    "Normal traffic/Temperature_and_Humidity/Temperature_and_Humidity.csv",
+    "Normal traffic/Water_Level/Water_Level.csv"
+  ],
+  "files_selected": 23,
+  "total_size_bytes": 7500509616,
+  "rows": 20192714,
+  "columns": 64,
+  "column_names": [
+    "frame.time",
+    "ip.src_host",
+    "ip.dst_host",
+    "arp.dst.proto_ipv4",
+    "arp.opcode",
+    "arp.hw.size",
+    "arp.src.proto_ipv4",
+    "icmp.checksum",
+    "icmp.seq_le",
+    "icmp.transmit_timestamp",
+    "icmp.unused",
+    "http.file_data",
+    "http.content_length",
+    "http.request.uri.query",
+    "http.request.method",
+    "http.referer",
+    "http.request.full_uri",
+    "http.request.version",
+    "http.response",
+    "http.tls_port",
+    "tcp.ack",
+    "tcp.ack_raw",
+    "tcp.checksum",
+    "tcp.connection.fin",
+    "tcp.connection.rst",
+    "tcp.connection.syn",
+    "tcp.connection.synack",
+    "tcp.dstport",
+    "tcp.flags",
+    "tcp.flags.ack",
+    "tcp.len",
+    "tcp.options",
+    "tcp.payload",
+    "tcp.seq",
+    "tcp.srcport",
+    "udp.port",
+    "udp.stream",
+    "udp.time_delta",
+    "dns.qry.name",
+    "dns.qry.name.len",
+    "dns.qry.qu",
+    "dns.qry.type",
+    "dns.retransmission",
+    "dns.retransmit_request",
+    "dns.retransmit_request_in",
+    "mqtt.conack.flags",
+    "mqtt.conflag.cleansess",
+    "mqtt.conflags",
+    "mqtt.hdrflags",
+    "mqtt.len",
+    "mqtt.msg_decoded_as",
+    "mqtt.msg",
+    "mqtt.msgtype",
+    "mqtt.proto_len",
+    "mqtt.protoname",
+    "mqtt.topic",
+    "mqtt.topic_len",
+    "mqtt.ver",
+    "mbtcp.len",
+    "mbtcp.trans_id",
+    "mbtcp.unit_id",
+    "Attack_label",
+    "Attack_type",
+    "source_file"
+  ],
+  "dtypes": {
+    "frame.time": "VARCHAR",
+    "ip.src_host": "VARCHAR",
+    "ip.dst_host": "VARCHAR",
+    "arp.dst.proto_ipv4": "VARCHAR",
+    "arp.opcode": "VARCHAR",
+    "arp.hw.size": "VARCHAR",
+    "arp.src.proto_ipv4": "VARCHAR",
+    "icmp.checksum": "VARCHAR",
+    "icmp.seq_le": "VARCHAR",
+    "icmp.transmit_timestamp": "VARCHAR",
+    "icmp.unused": "VARCHAR",
+    "http.file_data": "VARCHAR",
+    "http.content_length": "VARCHAR",
+    "http.request.uri.query": "VARCHAR",
+    "http.request.method": "VARCHAR",
+    "http.referer": "VARCHAR",
+    "http.request.full_uri": "VARCHAR",
+    "http.request.version": "VARCHAR",
+    "http.response": "VARCHAR",
+    "http.tls_port": "VARCHAR",
+    "tcp.ack": "VARCHAR",
+    "tcp.ack_raw": "VARCHAR",
+    "tcp.checksum": "VARCHAR",
+    "tcp.connection.fin": "VARCHAR",
+    "tcp.connection.rst": "VARCHAR",
+    "tcp.connection.syn": "VARCHAR",
+    "tcp.connection.synack": "VARCHAR",
+    "tcp.dstport": "VARCHAR",
+    "tcp.flags": "VARCHAR",
+    "tcp.flags.ack": "VARCHAR",
+    "tcp.len": "VARCHAR",
+    "tcp.options": "VARCHAR",
+    "tcp.payload": "VARCHAR",
+    "tcp.seq": "VARCHAR",
+    "tcp.srcport": "VARCHAR",
+    "udp.port": "VARCHAR",
+    "udp.stream": "VARCHAR",
+    "udp.time_delta": "VARCHAR",
+    "dns.qry.name": "VARCHAR",
+    "dns.qry.name.len": "VARCHAR",
+    "dns.qry.qu": "VARCHAR",
+    "dns.qry.type": "VARCHAR",
+    "dns.retransmission": "VARCHAR",
+    "dns.retransmit_request": "VARCHAR",
+    "dns.retransmit_request_in": "VARCHAR",
+    "mqtt.conack.flags": "VARCHAR",
+    "mqtt.conflag.cleansess": "VARCHAR",
+    "mqtt.conflags": "VARCHAR",
+    "mqtt.hdrflags": "VARCHAR",
+    "mqtt.len": "VARCHAR",
+    "mqtt.msg_decoded_as": "VARCHAR",
+    "mqtt.msg": "VARCHAR",
+    "mqtt.msgtype": "VARCHAR",
+    "mqtt.proto_len": "VARCHAR",
+    "mqtt.protoname": "VARCHAR",
+    "mqtt.topic": "VARCHAR",
+    "mqtt.topic_len": "VARCHAR",
+    "mqtt.ver": "VARCHAR",
+    "mbtcp.len": "VARCHAR",
+    "mbtcp.trans_id": "VARCHAR",
+    "mbtcp.unit_id": "VARCHAR",
+    "Attack_label": "VARCHAR",
+    "Attack_type": "VARCHAR",
+    "source_file": "VARCHAR"
+  },
+  "original_label_column": "Attack_type",
+  "label_distribution": [
+    {
+      "label_value": "Normal",
+      "row_count": 10463005
+    },
+    {
+      "label_value": "DDoS_UDP",
+      "row_count": 3201626
+    },
+    {
+      "label_value": "DDoS_ICMP",
+      "row_count": 2914354
+    },
+    {
+      "label_value": "DDoS_TCP",
+      "row_count": 2020120
+    },
+    {
+      "label_value": "Password",
+      "row_count": 1053385
+    },
+    {
+      "label_value": "DDoS_HTTP",
+      "row_count": 229022
+    },
+    {
+      "label_value": "Vulnerability_scanner",
+      "row_count": 145869
+    },
+    {
+      "label_value": "SQL_injection",
+      "row_count": 51203
+    },
+    {
+      "label_value": "Uploading",
+      "row_count": 37634
+    },
+    {
+      "label_value": "Backdoor",
+      "row_count": 24862
+    },
+    {
+      "label_value": "Port_Scanning",
+      "row_count": 22564
+    },
+    {
+      "label_value": "XSS",
+      "row_count": 15915
+    },
+    {
+      "label_value": "Ransomware",
+      "row_count": 10925
+    },
+    {
+      "label_value": "MITM",
+      "row_count": 1229
+    },
+    {
+      "label_value": "OS_Fingerprinting",
+      "row_count": 1001
+    }
+  ],
+  "binary_mapping": {
+    "normal_or_benign": 0,
+    "attack": 1
+  },
+  "binary_distribution": [
+    {
+      "binary_value": "0",
+      "row_count": 10463005
+    },
+    {
+      "binary_value": "1",
+      "row_count": 9729709
+    }
+  ],
+  "duplicate_rows_exact_excluding_source_file": 2622,
+  "duplicate_pct": 0.012984881576592429,
+  "constant_features_approx_cardinality": [
+    "icmp.unused"
+  ],
+  "near_constant_threshold": 0.995,
+  "near_constant_features": [
+    "dns.qry.type",
+    "dns.retransmission",
+    "dns.retransmit_request",
+    "dns.retransmit_request_in",
+    "mqtt.msg_decoded_as",
+    "mbtcp.unit_id"
+  ],
+  "statistics_note": "Rows, labels, missing, infinities and duplicates are exact. Cardinalities and quantiles use DuckDB approximate algorithms; see feature_stats CSV.",
+  "manifest_files": 45
+}

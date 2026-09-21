@@ -1,0 +1,42 @@
+feature,dtype,cardinality,decision,risk,reason
+Header_Length,object,5912,REVIEW,MEDIUM,frozen conditional attack candidate
+Protocol Type,object,5,KEEP,LOW,frozen categorical model feature
+Time_To_Live,object,33419,KEEP,LOW,frozen independently mutable model feature
+Rate,object,962125,REVIEW,MEDIUM,frozen conditional attack candidate
+fin_flag_number,object,492,KEEP,LOW,frozen binary model feature
+syn_flag_number,object,744,KEEP,LOW,frozen binary model feature
+rst_flag_number,object,860,KEEP,LOW,frozen binary model feature
+psh_flag_number,object,1158,KEEP,LOW,frozen binary model feature
+ack_flag_number,object,1649,KEEP,LOW,frozen binary model feature
+ece_flag_number,object,63,REMOVE,HIGH,frozen exclusion from model X
+cwr_flag_number,object,44,REMOVE,HIGH,frozen exclusion from model X
+ack_count,object,98,REVIEW,MEDIUM,frozen conditional attack candidate
+syn_count,object,98,REVIEW,MEDIUM,frozen conditional attack candidate
+fin_count,object,98,REVIEW,MEDIUM,frozen conditional attack candidate
+rst_count,object,98,REVIEW,MEDIUM,frozen conditional attack candidate
+HTTP,object,678,KEEP,LOW,frozen binary model feature
+HTTPS,object,931,KEEP,LOW,frozen binary model feature
+DNS,object,437,KEEP,LOW,frozen binary model feature
+Telnet,object,23,REMOVE,HIGH,frozen exclusion from model X
+SMTP,object,21,REMOVE,HIGH,frozen exclusion from model X
+SSH,object,74,REMOVE,HIGH,frozen exclusion from model X
+IRC,object,34,REMOVE,HIGH,frozen exclusion from model X
+TCP,object,1194,KEEP,LOW,frozen binary model feature
+UDP,object,1335,KEEP,LOW,frozen binary model feature
+DHCP,object,176,KEEP,LOW,frozen binary model feature
+ARP,object,505,KEEP,LOW,frozen binary model feature
+ICMP,object,1043,KEEP,LOW,frozen binary model feature
+IGMP,object,34,REMOVE,HIGH,frozen exclusion from model X
+IPv,object,510,KEEP,LOW,frozen binary model feature
+LLC,object,510,KEEP,LOW,frozen binary model feature
+Tot sum,object,115225,REVIEW,MEDIUM,frozen conditional attack candidate
+Min,object,1706,REVIEW,MEDIUM,frozen conditional attack candidate
+Max,object,7286,REVIEW,MEDIUM,frozen conditional attack candidate
+AVG,object,127955,REVIEW,MEDIUM,frozen conditional attack candidate
+Std,object,2102410,REVIEW,MEDIUM,frozen conditional attack candidate
+Tot size,object,127955,REVIEW,MEDIUM,frozen conditional attack candidate
+IAT,object,1222804,REVIEW,MEDIUM,frozen conditional attack candidate
+Number,object,96,REVIEW,MEDIUM,frozen conditional attack candidate
+Variance,object,3423386,REVIEW,MEDIUM,frozen conditional attack candidate
+source_file,object,430,REMOVE,HIGH,frozen exclusion from model X
+original_label,object,35,REMOVE,HIGH,frozen exclusion from model X

@@ -3,14 +3,22 @@ source_url: https://doi.org/10.1109/ACCESS.2022.3165809
 download_url: https://www.kaggle.com/datasets/mohamedamineferrag/edgeiiotset-cyber-security-dataset-of-iot-iiot
 accessed: '2026-09-21'
 format: csv
-glob: 'DNN-EdgeIIoT-dataset.csv'
-target: Attack_type
-benign_labels: [Normal]
-sample_max_rows: 500000
+raw_subdirectory: Edge-IIoTset Cyber Security/Edge-IIoTset dataset
+glob: '*.csv'
+target: Attack_label
+original_attack_column: Attack_type
+benign_labels: [0, '0']
+sample_max_rows: 1000000
+duplicate_policy: duplicate_aware_stratified
+cross_label_duplicate_policy: exclude_conflicting_fingerprints
+split: {train: 0.70, validation: 0.15, test: 0.15, seed: 42}
 feature_policy:
-  immutable: [frame.time, ip.src_host, ip.dst_host, arp.src.proto_ipv4, arp.dst.proto_ipv4]
+  remove: [frame.time, ip.src_host, ip.dst_host, arp.src.proto_ipv4, arp.dst.proto_ipv4, icmp.checksum, icmp.seq_le, icmp.transmit_timestamp, icmp.unused, http.file_data, http.request.uri.query, http.referer, http.request.full_uri, http.tls_port, tcp.checksum, tcp.options, tcp.payload, tcp.ack, tcp.ack_raw, tcp.seq, udp.stream, mqtt.msg, mqtt.topic, mbtcp.trans_id, dns.qry.name, dns.qry.type, dns.retransmission, dns.retransmit_request, dns.retransmit_request_in, mqtt.msg_decoded_as, mbtcp.unit_id, Attack_label, Attack_type, source_file]
+  immutable: [http.request.method, http.request.version, http.response, tcp.connection.rst, tcp.flags, dns.qry.name, dns.retransmit_request, mqtt.msg_decoded_as, mqtt.protoname, mqtt.topic]
   categorical: [http.request.method, http.referer, http.request.version]
-  semantically_constrained: [tcp.srcport, tcp.dstport, udp.port, mqtt.msg]
+  semantically_constrained: [tcp.srcport, tcp.dstport, udp.port, udp.time_delta, tcp.len, http.content_length, mqtt.len, mbtcp.len]
   mutable: []
-  note: Mutable features intentionally unresolved pending inspection of the official CSV and domain review.
-
+  note: No feature is independently mutable; constrained attacks require joint projection.
+  model_numeric: [arp.opcode, arp.hw.size, http.content_length, http.response, tcp.connection.fin, tcp.connection.rst, tcp.dstport, tcp.len, tcp.srcport, udp.port, udp.time_delta, dns.qry.name.len, dns.qry.qu, mqtt.len, mqtt.msgtype, mqtt.proto_len, mqtt.topic_len, mqtt.ver, mbtcp.len]
+  model_categorical: [http.request.method, http.request.version, tcp.flags, mqtt.protoname]
+  attack_conditionally_mutable: [udp.time_delta, http.content_length, tcp.len, mqtt.len, mbtcp.len, dns.qry.name.len]

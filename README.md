@@ -6,7 +6,7 @@ Experimental, reproducible foundation for evaluating a configurable adversarial 
 
 How effectively can an automated adversarial security gate integrated into an MLOps pipeline identify insufficiently robust intrusion-detection models before production deployment across heterogeneous IoT/IIoT datasets?
 
-No effectiveness claim is made before experiments are executed.
+No effectiveness claim is made before experiments are executed. Phase 1.5 has completed a read-only audit of the locally supplied datasets; see [the dataset audit](docs/phase1_5_dataset_audit.md).
 
 ## Architecture and methodology
 
@@ -28,7 +28,7 @@ MLflow is exposed at <http://localhost:5000>. Project directories are bind-mount
 
 ## Data acquisition
 
-Official source information and manual actions are documented in [data/README.md](data/README.md). Put only official CSV files in each `data/<dataset>/raw/` directory. Data and model binaries are ignored by Git.
+Official source information and the local read-only layout are documented in [data/README.md](data/README.md). Data and model binaries are ignored by Git. Audited manifests and methodological summaries are versioned without versioning the datasets.
 
 ## Reproducibility
 
@@ -49,4 +49,3 @@ No scientific results exist yet. Phase 1 is limited by official dataset access w
 ## Citation
 
 Citation metadata will be added after the study and manuscript are finalized.
-

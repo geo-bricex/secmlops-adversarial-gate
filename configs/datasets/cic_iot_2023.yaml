@@ -3,14 +3,23 @@ source_url: https://www.unb.ca/cic/datasets/iotdataset-2023.html
 download_url: https://cicresearch.ca/IOTDataset/CIC_IOT_Dataset2023/
 accessed: '2026-09-21'
 format: csv
+raw_subdirectory: CIC_IOT_Dataset2023/CSV
 glob: '*.csv'
-target: label
-benign_labels: [BenignTraffic]
-sample_max_rows: 500000
+target: original_label
+label_source: parent_directory
+benign_labels: [Benign_Final]
+sample_max_rows: 1000000
+duplicate_policy: deduplicate_then_stratified
+cross_label_duplicate_policy: exclude_conflicting_fingerprints
+split: {train: 0.70, validation: 0.15, test: 0.15, seed: 42}
 feature_policy:
-  binary: [fin_flag_number, syn_flag_number, rst_flag_number, psh_flag_number, ack_flag_number, ece_flag_number, cwr_flag_number, HTTP, HTTPS, DNS, Telnet, SMTP, SSH, IRC, TCP, UDP, DHCP, ARP, ICMP, IPv, LLC]
+  binary: [fin_flag_number, syn_flag_number, rst_flag_number, psh_flag_number, ack_flag_number, ece_flag_number, cwr_flag_number, HTTP, HTTPS, DNS, Telnet, SMTP, SSH, IRC, TCP, UDP, DHCP, ARP, ICMP, IGMP, IPv, LLC]
   immutable: [Protocol Type]
-  derived: [Rate, Srate, Drate, Tot sum, Min, Max, AVG, Std, Tot size, Magnitue, Radius, Covariance, Variance, Weight]
-  mutable: [flow_duration, Header_Length, Duration, IAT, Number, ack_count, syn_count, fin_count, urg_count, rst_count]
-  discrete: [Header_Length, Duration, Number]
-
+  derived: [Rate, Tot sum, Min, Max, AVG, Std, Tot size, Variance]
+  mutable: [Time_To_Live]
+  conditionally_mutable: [Header_Length, Rate, ack_count, syn_count, fin_count, rst_count, Tot sum, Min, Max, AVG, Std, Tot size, IAT, Number, Variance]
+  discrete: [Header_Length, Time_To_Live, Number, ack_count, syn_count, fin_count, rst_count]
+  remove: [source_file, original_label, ece_flag_number, cwr_flag_number, Telnet, SMTP, SSH, IRC, IGMP]
+  model_numeric: [Header_Length, Time_To_Live, Rate, ack_count, syn_count, fin_count, rst_count, Tot sum, Min, Max, AVG, Std, Tot size, IAT, Number, Variance]
+  model_binary: [fin_flag_number, syn_flag_number, rst_flag_number, psh_flag_number, ack_flag_number, HTTP, HTTPS, DNS, TCP, UDP, DHCP, ARP, ICMP, IPv, LLC]
+  model_categorical: [Protocol Type]

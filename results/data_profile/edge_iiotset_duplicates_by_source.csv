@@ -1,0 +1,4 @@
+source_file,duplicate_rows
+/workspace/data/edge_iiotset/raw/Edge-IIoTset Cyber Security/Edge-IIoTset dataset/Attack traffic/MITM_attack.csv,819.0
+/workspace/data/edge_iiotset/raw/Edge-IIoTset Cyber Security/Edge-IIoTset dataset/Normal traffic/Modbus/Modbus.csv,1307.0
+/workspace/data/edge_iiotset/raw/Edge-IIoTset Cyber Security/Edge-IIoTset dataset/Attack traffic/DDoS_UDP_Flood_attack.csv,496.0

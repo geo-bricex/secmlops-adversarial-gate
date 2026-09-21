@@ -1,0 +1,190 @@
+{
+  "dataset": "ton_iot",
+  "selected_files": [
+    "train_test_network.csv"
+  ],
+  "files_selected": 1,
+  "total_size_bytes": 29902775,
+  "rows": 211043,
+  "columns": 45,
+  "column_names": [
+    "src_ip",
+    "src_port",
+    "dst_ip",
+    "dst_port",
+    "proto",
+    "service",
+    "duration",
+    "src_bytes",
+    "dst_bytes",
+    "conn_state",
+    "missed_bytes",
+    "src_pkts",
+    "src_ip_bytes",
+    "dst_pkts",
+    "dst_ip_bytes",
+    "dns_query",
+    "dns_qclass",
+    "dns_qtype",
+    "dns_rcode",
+    "dns_AA",
+    "dns_RD",
+    "dns_RA",
+    "dns_rejected",
+    "ssl_version",
+    "ssl_cipher",
+    "ssl_resumed",
+    "ssl_established",
+    "ssl_subject",
+    "ssl_issuer",
+    "http_trans_depth",
+    "http_method",
+    "http_uri",
+    "http_version",
+    "http_request_body_len",
+    "http_response_body_len",
+    "http_status_code",
+    "http_user_agent",
+    "http_orig_mime_types",
+    "http_resp_mime_types",
+    "weird_name",
+    "weird_addl",
+    "weird_notice",
+    "label",
+    "type",
+    "source_file"
+  ],
+  "dtypes": {
+    "src_ip": "VARCHAR",
+    "src_port": "BIGINT",
+    "dst_ip": "VARCHAR",
+    "dst_port": "BIGINT",
+    "proto": "VARCHAR",
+    "service": "VARCHAR",
+    "duration": "DOUBLE",
+    "src_bytes": "BIGINT",
+    "dst_bytes": "BIGINT",
+    "conn_state": "VARCHAR",
+    "missed_bytes": "BIGINT",
+    "src_pkts": "BIGINT",
+    "src_ip_bytes": "BIGINT",
+    "dst_pkts": "BIGINT",
+    "dst_ip_bytes": "BIGINT",
+    "dns_query": "VARCHAR",
+    "dns_qclass": "BIGINT",
+    "dns_qtype": "BIGINT",
+    "dns_rcode": "BIGINT",
+    "dns_AA": "VARCHAR",
+    "dns_RD": "VARCHAR",
+    "dns_RA": "VARCHAR",
+    "dns_rejected": "VARCHAR",
+    "ssl_version": "VARCHAR",
+    "ssl_cipher": "VARCHAR",
+    "ssl_resumed": "VARCHAR",
+    "ssl_established": "VARCHAR",
+    "ssl_subject": "VARCHAR",
+    "ssl_issuer": "VARCHAR",
+    "http_trans_depth": "VARCHAR",
+    "http_method": "VARCHAR",
+    "http_uri": "VARCHAR",
+    "http_version": "VARCHAR",
+    "http_request_body_len": "BIGINT",
+    "http_response_body_len": "BIGINT",
+    "http_status_code": "BIGINT",
+    "http_user_agent": "VARCHAR",
+    "http_orig_mime_types": "VARCHAR",
+    "http_resp_mime_types": "VARCHAR",
+    "weird_name": "VARCHAR",
+    "weird_addl": "VARCHAR",
+    "weird_notice": "VARCHAR",
+    "label": "BIGINT",
+    "type": "VARCHAR",
+    "source_file": "VARCHAR"
+  },
+  "original_label_column": "type",
+  "label_distribution": [
+    {
+      "label_value": "normal",
+      "row_count": 50000
+    },
+    {
+      "label_value": "ddos",
+      "row_count": 20000
+    },
+    {
+      "label_value": "password",
+      "row_count": 20000
+    },
+    {
+      "label_value": "backdoor",
+      "row_count": 20000
+    },
+    {
+      "label_value": "ransomware",
+      "row_count": 20000
+    },
+    {
+      "label_value": "scanning",
+      "row_count": 20000
+    },
+    {
+      "label_value": "dos",
+      "row_count": 20000
+    },
+    {
+      "label_value": "injection",
+      "row_count": 20000
+    },
+    {
+      "label_value": "xss",
+      "row_count": 20000
+    },
+    {
+      "label_value": "mitm",
+      "row_count": 1043
+    }
+  ],
+  "binary_mapping": {
+    "normal_or_benign": 0,
+    "attack": 1
+  },
+  "binary_distribution": [
+    {
+      "binary_value": 0,
+      "row_count": 50000
+    },
+    {
+      "binary_value": 1,
+      "row_count": 161043
+    }
+  ],
+  "duplicate_rows_exact_excluding_source_file": 20569,
+  "duplicate_pct": 9.746355008221073,
+  "constant_features_approx_cardinality": [
+    "source_file"
+  ],
+  "near_constant_threshold": 0.995,
+  "near_constant_features": [
+    "ssl_version",
+    "ssl_cipher",
+    "ssl_resumed",
+    "ssl_established",
+    "ssl_subject",
+    "ssl_issuer",
+    "http_trans_depth",
+    "http_method",
+    "http_uri",
+    "http_version",
+    "http_request_body_len",
+    "http_response_body_len",
+    "http_status_code",
+    "http_user_agent",
+    "http_orig_mime_types",
+    "http_resp_mime_types",
+    "weird_name",
+    "weird_addl",
+    "weird_notice"
+  ],
+  "statistics_note": "Rows, labels, missing, infinities and duplicates are exact. Cardinalities and quantiles use DuckDB approximate algorithms; see feature_stats CSV.",
+  "manifest_files": 1
+}

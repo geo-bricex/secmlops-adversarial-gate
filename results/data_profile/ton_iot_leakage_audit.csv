@@ -1,0 +1,46 @@
+feature,dtype,cardinality,decision,risk,reason
+src_ip,object,47,REMOVE,HIGH,frozen exclusion from model X
+src_port,object,26236,KEEP,LOW,frozen numeric model feature
+dst_ip,object,649,REMOVE,HIGH,frozen exclusion from model X
+dst_port,object,2193,KEEP,LOW,frozen numeric model feature
+proto,object,3,KEEP,LOW,frozen categorical model feature
+service,object,10,KEEP,LOW,frozen categorical model feature
+duration,object,69063,REVIEW,MEDIUM,frozen conditional attack candidate
+src_bytes,object,3078,REVIEW,MEDIUM,frozen conditional attack candidate
+dst_bytes,object,2481,REVIEW,MEDIUM,frozen conditional attack candidate
+conn_state,object,13,KEEP,LOW,frozen categorical model feature
+missed_bytes,object,656,REVIEW,MEDIUM,frozen conditional attack candidate
+src_pkts,object,319,REVIEW,MEDIUM,frozen conditional attack candidate
+src_ip_bytes,object,3984,REVIEW,MEDIUM,frozen conditional attack candidate
+dst_pkts,object,234,REVIEW,MEDIUM,frozen conditional attack candidate
+dst_ip_bytes,object,3994,REVIEW,MEDIUM,frozen conditional attack candidate
+dns_query,object,535,REMOVE,HIGH,frozen exclusion from model X
+dns_qclass,object,3,KEEP,LOW,frozen numeric model feature
+dns_qtype,object,10,KEEP,LOW,frozen numeric model feature
+dns_rcode,object,4,KEEP,LOW,frozen numeric model feature
+dns_AA,object,3,KEEP,LOW,frozen categorical model feature
+dns_RD,object,3,KEEP,LOW,frozen categorical model feature
+dns_RA,object,3,KEEP,LOW,frozen categorical model feature
+dns_rejected,object,3,KEEP,LOW,frozen categorical model feature
+ssl_version,object,4,REMOVE,HIGH,frozen exclusion from model X
+ssl_cipher,object,6,REMOVE,HIGH,frozen exclusion from model X
+ssl_resumed,object,3,REMOVE,HIGH,frozen exclusion from model X
+ssl_established,object,3,REMOVE,HIGH,frozen exclusion from model X
+ssl_subject,object,6,REMOVE,HIGH,frozen exclusion from model X
+ssl_issuer,object,5,REMOVE,HIGH,frozen exclusion from model X
+http_trans_depth,object,9,REMOVE,HIGH,frozen exclusion from model X
+http_method,object,4,REMOVE,HIGH,frozen exclusion from model X
+http_uri,object,88,REMOVE,HIGH,frozen exclusion from model X
+http_version,object,2,REMOVE,HIGH,frozen exclusion from model X
+http_request_body_len,object,6,REMOVE,HIGH,frozen exclusion from model X
+http_response_body_len,object,65,REMOVE,HIGH,frozen exclusion from model X
+http_status_code,object,9,REMOVE,HIGH,frozen exclusion from model X
+http_user_agent,object,36,REMOVE,HIGH,frozen exclusion from model X
+http_orig_mime_types,object,3,REMOVE,HIGH,frozen exclusion from model X
+http_resp_mime_types,object,11,REMOVE,HIGH,frozen exclusion from model X
+weird_name,object,12,REMOVE,HIGH,frozen exclusion from model X
+weird_addl,object,3,REMOVE,HIGH,frozen exclusion from model X
+weird_notice,object,2,REMOVE,HIGH,frozen exclusion from model X
+label,object,2,REMOVE,HIGH,frozen exclusion from model X
+type,object,11,REMOVE,HIGH,frozen exclusion from model X
+source_file,object,1,REMOVE,HIGH,frozen exclusion from model X
