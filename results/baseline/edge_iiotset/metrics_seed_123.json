@@ -1,0 +1,40 @@
+{
+  "accuracy": 1.0,
+  "precision": 1.0,
+  "attack_recall": 1.0,
+  "f1": 1.0,
+  "roc_auc": 1.0,
+  "pr_auc": 1.0,
+  "mcc": 1.0,
+  "specificity": 1.0,
+  "tp": 66316,
+  "tn": 83684,
+  "fp": 0,
+  "fn": 0,
+  "false_positive_rate": 0.0,
+  "false_negative_rate": 0.0,
+  "confusion_matrix": [
+    [
+      83684,
+      0
+    ],
+    [
+      0,
+      66316
+    ]
+  ],
+  "dataset": "edge_iiotset",
+  "seed": 123,
+  "threshold": 0.5,
+  "best_epoch": 15,
+  "epochs": 15,
+  "preprocessing_seconds": 16.61374044418335,
+  "training_seconds": 248.63700032234192,
+  "inference_seconds": 0.07195425033569336,
+  "test_seconds": 0.07195425033569336,
+  "total_seconds": 265.32269501686096,
+  "feature_count": 38,
+  "leakage_alarm": true,
+  "device": "cpu",
+  "ram_mb": 1220.37109375
+}

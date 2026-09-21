@@ -1,0 +1,23 @@
+feature,unique_values,exclusive_values,max_class_purity,univariate_auc,status,semantic_type,inference_available,proxy_risk,decision,reason
+arp.opcode,4,3,1.0,0.5000403918983546,POTENTIAL_PROXY,NETWORK_MEASUREMENT,True,SCENARIO_ASSOCIATED_BUT_LEGITIMATE,KEEP,Observed traffic/protocol attribute; no target or provenance lineage.
+arp.hw.size,3,2,1.0,0.5000403918983546,POTENTIAL_PROXY,NETWORK_MEASUREMENT,True,SCENARIO_ASSOCIATED_BUT_LEGITIMATE,KEEP,Observed traffic/protocol attribute; no target or provenance lineage.
+http.content_length,1,0,0.5579009624326962,0.5,NORMAL,NETWORK_MEASUREMENT,True,SCENARIO_ASSOCIATED_BUT_LEGITIMATE,KEEP,Observed traffic/protocol attribute; no target or provenance lineage.
+http.response,2,1,1.0,0.5000032313518684,NORMAL,NETWORK_MEASUREMENT,True,SCENARIO_ASSOCIATED_BUT_LEGITIMATE,KEEP,Observed traffic/protocol attribute; no target or provenance lineage.
+tcp.connection.fin,3,1,1.0,0.4715407082105749,NORMAL,NETWORK_MEASUREMENT,True,SCENARIO_ASSOCIATED_BUT_LEGITIMATE,KEEP,Observed traffic/protocol attribute; no target or provenance lineage.
+tcp.connection.rst,2,1,1.0,0.5011212790983236,NORMAL,NETWORK_MEASUREMENT,True,SCENARIO_ASSOCIATED_BUT_LEGITIMATE,KEEP,Observed traffic/protocol attribute; no target or provenance lineage.
+tcp.len,334,292,1.0,0.8963781568317,POTENTIAL_PROXY,NETWORK_MEASUREMENT,True,SCENARIO_ASSOCIATED_BUT_LEGITIMATE,KEEP,Observed traffic/protocol attribute; no target or provenance lineage.
+tcp.srcport,35642,25432,1.0,0.3607721903677012,POTENTIAL_PROXY,NETWORK_MEASUREMENT,True,SCENARIO_ASSOCIATED_BUT_LEGITIMATE,KEEP,Observed traffic/protocol attribute; no target or provenance lineage.
+udp.port,405,404,1.0,0.496879873197637,POTENTIAL_PROXY,NETWORK_MEASUREMENT,True,SCENARIO_ASSOCIATED_BUT_LEGITIMATE,KEEP,Observed traffic/protocol attribute; no target or provenance lineage.
+udp.time_delta,961,960,1.0,0.4973599911914352,POTENTIAL_PROXY,NETWORK_MEASUREMENT,True,SCENARIO_ASSOCIATED_BUT_LEGITIMATE,KEEP,Observed traffic/protocol attribute; no target or provenance lineage.
+dns.qry.name.len,5,4,1.0,0.4972063534334198,POTENTIAL_PROXY,NETWORK_MEASUREMENT,True,SCENARIO_ASSOCIATED_BUT_LEGITIMATE,KEEP,Observed traffic/protocol attribute; no target or provenance lineage.
+dns.qry.qu,2,1,1.0,0.5,NORMAL,NETWORK_MEASUREMENT,True,SCENARIO_ASSOCIATED_BUT_LEGITIMATE,KEEP,Observed traffic/protocol attribute; no target or provenance lineage.
+mqtt.len,42,41,1.0,0.1583621190743837,POTENTIAL_PROXY,NETWORK_MEASUREMENT,True,SCENARIO_ASSOCIATED_BUT_LEGITIMATE,KEEP,Observed traffic/protocol attribute; no target or provenance lineage.
+mqtt.msgtype,4,3,1.0,0.1228564331970225,POTENTIAL_PROXY,NETWORK_MEASUREMENT,True,SCENARIO_ASSOCIATED_BUT_LEGITIMATE,KEEP,Observed traffic/protocol attribute; no target or provenance lineage.
+mqtt.proto_len,4,3,1.0,0.4647388542208133,POTENTIAL_PROXY,NETWORK_MEASUREMENT,True,SCENARIO_ASSOCIATED_BUT_LEGITIMATE,KEEP,Observed traffic/protocol attribute; no target or provenance lineage.
+mqtt.topic_len,7,6,1.0,0.1936232648535704,POTENTIAL_PROXY,NETWORK_MEASUREMENT,True,SCENARIO_ASSOCIATED_BUT_LEGITIMATE,KEEP,Observed traffic/protocol attribute; no target or provenance lineage.
+mqtt.ver,20,19,1.0,0.3768439731748474,POTENTIAL_PROXY,NETWORK_MEASUREMENT,True,SCENARIO_ASSOCIATED_BUT_LEGITIMATE,KEEP,Observed traffic/protocol attribute; no target or provenance lineage.
+mbtcp.len,44390,44389,1.0,0.4119758071743711,POTENTIAL_PROXY,NETWORK_MEASUREMENT,True,SCENARIO_ASSOCIATED_BUT_LEGITIMATE,KEEP,Observed traffic/protocol attribute; no target or provenance lineage.
+http.request.method,3,2,1.0,,POTENTIAL_PROXY,CATEGORICAL,True,SCENARIO_ASSOCIATED_BUT_LEGITIMATE,KEEP,Observed traffic/protocol attribute; no target or provenance lineage.
+http.request.version,4,3,1.0,,POTENTIAL_PROXY,CATEGORICAL,True,SCENARIO_ASSOCIATED_BUT_LEGITIMATE,KEEP,Observed traffic/protocol attribute; no target or provenance lineage.
+tcp.flags,10,3,1.0,,POTENTIAL_PROXY,CATEGORICAL,True,SCENARIO_ASSOCIATED_BUT_LEGITIMATE,KEEP,Observed traffic/protocol attribute; no target or provenance lineage.
+mqtt.protoname,3,2,1.0,,POTENTIAL_PROXY,CATEGORICAL,True,SCENARIO_ASSOCIATED_BUT_LEGITIMATE,KEEP,Observed traffic/protocol attribute; no target or provenance lineage.

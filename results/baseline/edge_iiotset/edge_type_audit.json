@@ -1,0 +1,261 @@
+{
+  "rows": 1000000,
+  "features": [
+    {
+      "feature": "arp.opcode",
+      "expected_type": "numeric",
+      "actual_numeric_count": 1000000,
+      "actual_non_numeric_count": 0,
+      "non_numeric_pct": 0.0
+    },
+    {
+      "feature": "arp.hw.size",
+      "expected_type": "numeric",
+      "actual_numeric_count": 999983,
+      "actual_non_numeric_count": 17,
+      "non_numeric_pct": 0.0017
+    },
+    {
+      "feature": "http.content_length",
+      "expected_type": "numeric",
+      "actual_numeric_count": 1000000,
+      "actual_non_numeric_count": 0,
+      "non_numeric_pct": 0.0
+    },
+    {
+      "feature": "http.response",
+      "expected_type": "numeric",
+      "actual_numeric_count": 1000000,
+      "actual_non_numeric_count": 0,
+      "non_numeric_pct": 0.0
+    },
+    {
+      "feature": "tcp.connection.fin",
+      "expected_type": "numeric",
+      "actual_numeric_count": 1000000,
+      "actual_non_numeric_count": 0,
+      "non_numeric_pct": 0.0
+    },
+    {
+      "feature": "tcp.connection.rst",
+      "expected_type": "numeric",
+      "actual_numeric_count": 1000000,
+      "actual_non_numeric_count": 0,
+      "non_numeric_pct": 0.0
+    },
+    {
+      "feature": "tcp.dstport",
+      "expected_type": "numeric",
+      "actual_numeric_count": 992196,
+      "actual_non_numeric_count": 7804,
+      "non_numeric_pct": 0.7804
+    },
+    {
+      "feature": "tcp.len",
+      "expected_type": "numeric",
+      "actual_numeric_count": 999977,
+      "actual_non_numeric_count": 23,
+      "non_numeric_pct": 0.0023
+    },
+    {
+      "feature": "tcp.srcport",
+      "expected_type": "numeric",
+      "actual_numeric_count": 999985,
+      "actual_non_numeric_count": 15,
+      "non_numeric_pct": 0.0015
+    },
+    {
+      "feature": "udp.port",
+      "expected_type": "numeric",
+      "actual_numeric_count": 1000000,
+      "actual_non_numeric_count": 0,
+      "non_numeric_pct": 0.0
+    },
+    {
+      "feature": "udp.time_delta",
+      "expected_type": "numeric",
+      "actual_numeric_count": 1000000,
+      "actual_non_numeric_count": 0,
+      "non_numeric_pct": 0.0
+    },
+    {
+      "feature": "dns.qry.name.len",
+      "expected_type": "numeric",
+      "actual_numeric_count": 999908,
+      "actual_non_numeric_count": 92,
+      "non_numeric_pct": 0.0092
+    },
+    {
+      "feature": "dns.qry.qu",
+      "expected_type": "numeric",
+      "actual_numeric_count": 999993,
+      "actual_non_numeric_count": 7,
+      "non_numeric_pct": 0.0007
+    },
+    {
+      "feature": "mqtt.len",
+      "expected_type": "numeric",
+      "actual_numeric_count": 1000000,
+      "actual_non_numeric_count": 0,
+      "non_numeric_pct": 0.0
+    },
+    {
+      "feature": "mqtt.msgtype",
+      "expected_type": "numeric",
+      "actual_numeric_count": 1000000,
+      "actual_non_numeric_count": 0,
+      "non_numeric_pct": 0.0
+    },
+    {
+      "feature": "mqtt.proto_len",
+      "expected_type": "numeric",
+      "actual_numeric_count": 1000000,
+      "actual_non_numeric_count": 0,
+      "non_numeric_pct": 0.0
+    },
+    {
+      "feature": "mqtt.topic_len",
+      "expected_type": "numeric",
+      "actual_numeric_count": 1000000,
+      "actual_non_numeric_count": 0,
+      "non_numeric_pct": 0.0
+    },
+    {
+      "feature": "mqtt.ver",
+      "expected_type": "numeric",
+      "actual_numeric_count": 1000000,
+      "actual_non_numeric_count": 0,
+      "non_numeric_pct": 0.0
+    },
+    {
+      "feature": "mbtcp.len",
+      "expected_type": "numeric",
+      "actual_numeric_count": 1000000,
+      "actual_non_numeric_count": 0,
+      "non_numeric_pct": 0.0
+    },
+    {
+      "feature": "http.request.method",
+      "expected_type": "categorical",
+      "actual_numeric_count": null,
+      "actual_non_numeric_count": null,
+      "non_numeric_pct": null
+    },
+    {
+      "feature": "http.request.version",
+      "expected_type": "categorical",
+      "actual_numeric_count": null,
+      "actual_non_numeric_count": null,
+      "non_numeric_pct": null
+    },
+    {
+      "feature": "tcp.flags",
+      "expected_type": "categorical",
+      "actual_numeric_count": null,
+      "actual_non_numeric_count": null,
+      "non_numeric_pct": null
+    },
+    {
+      "feature": "mqtt.protoname",
+      "expected_type": "categorical",
+      "actual_numeric_count": null,
+      "actual_non_numeric_count": null,
+      "non_numeric_pct": null
+    }
+  ],
+  "problem_details": {
+    "arp.hw.size": {
+      "top_non_numeric_tokens": {
+        "192.168.0.128": 10,
+        "192.168.7.62": 7
+      },
+      "ip_like_count": 17
+    },
+    "tcp.dstport": {
+      "top_non_numeric_tokens": {
+        "0x00000018": 5155,
+        "0x00000010": 2615,
+        "0x00000011": 15,
+        "0x00000012": 10,
+        "0x00000002": 8,
+        "0x00000004": 1
+      },
+      "ip_like_count": 0
+    },
+    "tcp.len": {
+      "top_non_numeric_tokens": {
+        "020405b40101040201030307": 10,
+        "020405b40103030801010402": 8,
+        "0101050af1f703d1f1f703dc": 2,
+        "0101050a805edf12805edf43": 1,
+        "0101050adc83d1e0dc83d470": 1,
+        "0101050a3b67845e3b678467": 1
+      },
+      "ip_like_count": 0
+    },
+    "tcp.srcport": {
+      "top_non_numeric_tokens": {
+        "_googlecast._tcp.local": 8,
+        "DESKTOP-UHF0SF2.local": 4,
+        "DESKTOP-UHF0SF2": 3
+      },
+      "ip_like_count": 0
+    },
+    "dns.qry.name.len": {
+      "top_non_numeric_tokens": {
+        "0.debian.pool.ntp.org": 22,
+        "1.debian.pool.ntp.org": 21,
+        "3.debian.pool.ntp.org": 21,
+        "2.debian.pool.ntp.org": 18,
+        "_233637DE._sub._googlecast._tcp.local": 4,
+        "_ipp._tcp.local": 3,
+        "raspberrypi.local": 2,
+        "null-null.local": 1
+      },
+      "ip_like_count": 0
+    },
+    "dns.qry.qu": {
+      "top_non_numeric_tokens": {
+        "_googlecast._tcp.local": 4,
+        "_ipps._tcp.local": 3
+      },
+      "ip_like_count": 0
+    },
+    "http.request.method": {
+      "top_non_numeric_tokens": {
+        "GET": 5775,
+        "POST": 1196,
+        "TRACE": 15,
+        "OPTIONS": 2
+      },
+      "ip_like_count": 0
+    },
+    "http.request.version": {
+      "top_non_numeric_tokens": {
+        "HTTP/1.0": 3562,
+        "HTTP/1.1": 3423,
+        "> HTTP/1.1": 3
+      },
+      "ip_like_count": 0
+    },
+    "tcp.flags": {
+      "top_non_numeric_tokens": {
+        "0x00000010": 255285,
+        "0x00000018": 115449,
+        "0x00000002": 97897,
+        "0x00000004": 68240,
+        "0x00000014": 42737,
+        "0x00000011": 41175,
+        "0x00000012": 36369,
+        "0x00000019": 31012
+      },
+      "ip_like_count": 0
+    },
+    "mqtt.protoname": {
+      "top_non_numeric_tokens": {
+        "MQTT": 30538
+      },
+      "ip_like_count": 0
+    }
+  }
+}

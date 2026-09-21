@@ -1,0 +1,9 @@
+{
+  "preprocessing_seconds": 5.310669660568237,
+  "training_seconds": 253.7965054512024,
+  "inference_seconds": 0.10531353950500488,
+  "test_seconds": 0.10531353950500488,
+  "total_seconds": 259.21248865127563,
+  "device": "cpu",
+  "ram_mb": 1260.8203125
+}

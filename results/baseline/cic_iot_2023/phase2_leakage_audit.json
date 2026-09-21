@@ -1,0 +1,12 @@
+{
+  "dataset": "cic_iot_2023",
+  "feature_contract_count": 32,
+  "forbidden_feature_lineage": [],
+  "fingerprint_overlap_train_validation": 0,
+  "fingerprint_overlap_train_test": 0,
+  "fingerprint_overlap_validation_test": 0,
+  "preprocessing_fit_scope": "TRAIN_ONLY",
+  "test_used_after_checkpoint_selection": true,
+  "status": "PASS",
+  "leakage_conclusion": "NO_DIRECT_LEAKAGE_DETECTED"
+}

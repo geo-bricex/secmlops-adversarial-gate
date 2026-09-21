@@ -27,6 +27,12 @@ results/**/*.duckdb*
 !results/data_profile/*_leakage_audit.csv
 !results/data_profile/*_feature_semantics.csv
 !results/data_profile/*_duplicate_audit.json
+!results/data_profile/*_cleaning_policy.json
+!results/data_profile/*_semantic_residual_audit.json
+!results/baseline/**/*.csv
+!results/baseline/**/*.json
+!results/figures/baseline/*.png
+!results/figures/baseline/*.svg
 !results/**/.gitkeep
 *.pt
 *.pth

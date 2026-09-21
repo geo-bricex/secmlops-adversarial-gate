@@ -1,94 +1,146 @@
 {
-  "unique_feature_vectors": 20190092,
-  "duplicate_groups": 773,
-  "rows_in_duplicate_groups": 3395,
-  "mean_duplicate_group_size": 4.391979301423027,
-  "max_duplicate_group_size": 480,
+  "source": "canonical parquet",
+  "total_valid_rows": 18752706,
+  "unique_feature_vectors": 865788,
+  "duplicate_rows": 17886918,
+  "duplicate_groups": 18522070,
+  "duplicate_rows_count": 8602747718236,
   "cross_label_duplicate_groups": 0,
   "cross_label_duplicate_rows": 0,
-  "dataset": "edge_iiotset",
-  "rows_total": 20192714,
-  "predictor_columns": [
-    "frame.time",
-    "ip.src_host",
-    "ip.dst_host",
-    "arp.dst.proto_ipv4",
-    "arp.opcode",
-    "arp.hw.size",
-    "arp.src.proto_ipv4",
-    "icmp.checksum",
-    "icmp.seq_le",
-    "icmp.transmit_timestamp",
-    "icmp.unused",
-    "http.file_data",
-    "http.content_length",
-    "http.request.uri.query",
-    "http.request.method",
-    "http.referer",
-    "http.request.full_uri",
-    "http.request.version",
-    "http.response",
-    "http.tls_port",
-    "tcp.ack",
-    "tcp.ack_raw",
-    "tcp.checksum",
-    "tcp.connection.fin",
-    "tcp.connection.rst",
-    "tcp.connection.syn",
-    "tcp.connection.synack",
-    "tcp.dstport",
-    "tcp.flags",
-    "tcp.flags.ack",
-    "tcp.len",
-    "tcp.options",
-    "tcp.payload",
-    "tcp.seq",
-    "tcp.srcport",
-    "udp.port",
-    "udp.stream",
-    "udp.time_delta",
-    "dns.qry.name",
-    "dns.qry.name.len",
-    "dns.qry.qu",
-    "dns.qry.type",
-    "dns.retransmission",
-    "dns.retransmit_request",
-    "dns.retransmit_request_in",
-    "mqtt.conack.flags",
-    "mqtt.conflag.cleansess",
-    "mqtt.conflags",
-    "mqtt.hdrflags",
-    "mqtt.len",
-    "mqtt.msg_decoded_as",
-    "mqtt.msg",
-    "mqtt.msgtype",
-    "mqtt.proto_len",
-    "mqtt.protoname",
-    "mqtt.topic",
-    "mqtt.topic_len",
-    "mqtt.ver",
-    "mbtcp.len",
-    "mbtcp.trans_id",
-    "mbtcp.unit_id"
-  ],
-  "predictor_column_count": 61,
-  "fingerprint_method": "DuckDB 64-bit hash over all predictive columns, excluding target/type/provenance metadata",
-  "within_label_duplicate_rows": 2622,
-  "duplicate_rows": 2622,
-  "label_summary": [
+  "feature_checks": [
     {
-      "binary_label": 0,
-      "original_rows": 10463005,
-      "deduplicated_rows": 10461698,
-      "conflicting_rows": 0
+      "feature": "arp.opcode",
+      "rows": 18752706,
+      "nonnumeric": 7,
+      "min": 0.0,
+      "max": 6.0
     },
     {
-      "binary_label": 1,
-      "original_rows": 9729709,
-      "deduplicated_rows": 9728394,
-      "conflicting_rows": 0
+      "feature": "arp.hw.size",
+      "rows": 18752706,
+      "nonnumeric": 666,
+      "min": 0.0,
+      "max": 6.0
+    },
+    {
+      "feature": "http.content_length",
+      "rows": 18752706,
+      "nonnumeric": 0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    {
+      "feature": "http.response",
+      "rows": 18752706,
+      "nonnumeric": 0,
+      "min": 0.0,
+      "max": 1.0
+    },
+    {
+      "feature": "tcp.connection.fin",
+      "rows": 18752706,
+      "nonnumeric": 6,
+      "min": 0.0,
+      "max": 1.0
+    },
+    {
+      "feature": "tcp.connection.rst",
+      "rows": 18752706,
+      "nonnumeric": 0,
+      "min": 0.0,
+      "max": 1.0
+    },
+    {
+      "feature": "tcp.dstport",
+      "rows": 18752706,
+      "nonnumeric": 155549,
+      "min": 0.0,
+      "max": 65535.0
+    },
+    {
+      "feature": "tcp.len",
+      "rows": 18752706,
+      "nonnumeric": 389,
+      "min": 0.0,
+      "max": 65228.0
+    },
+    {
+      "feature": "tcp.srcport",
+      "rows": 18752706,
+      "nonnumeric": 376,
+      "min": 0.0,
+      "max": 65535.0
+    },
+    {
+      "feature": "udp.port",
+      "rows": 18752706,
+      "nonnumeric": 9,
+      "min": 0.0,
+      "max": 63894.0
+    },
+    {
+      "feature": "udp.time_delta",
+      "rows": 18752706,
+      "nonnumeric": 0,
+      "min": 0.0,
+      "max": 52570.0
+    },
+    {
+      "feature": "dns.qry.name.len",
+      "rows": 18752706,
+      "nonnumeric": 1916,
+      "min": 0.0,
+      "max": 245.0
+    },
+    {
+      "feature": "dns.qry.qu",
+      "rows": 18752706,
+      "nonnumeric": 71,
+      "min": 0.0,
+      "max": 1028.0
+    },
+    {
+      "feature": "mqtt.len",
+      "rows": 18752706,
+      "nonnumeric": 1,
+      "min": 0.0,
+      "max": 49.0
+    },
+    {
+      "feature": "mqtt.msgtype",
+      "rows": 18752706,
+      "nonnumeric": 0,
+      "min": 0.0,
+      "max": 14.0
+    },
+    {
+      "feature": "mqtt.proto_len",
+      "rows": 18752706,
+      "nonnumeric": 1,
+      "min": 0.0,
+      "max": 4.0
+    },
+    {
+      "feature": "mqtt.topic_len",
+      "rows": 18752706,
+      "nonnumeric": 0,
+      "min": 0.0,
+      "max": 24.0
+    },
+    {
+      "feature": "mqtt.ver",
+      "rows": 18752706,
+      "nonnumeric": 0,
+      "min": 0.0,
+      "max": 187.0
+    },
+    {
+      "feature": "mbtcp.len",
+      "rows": 18752706,
+      "nonnumeric": 1,
+      "min": 0.0,
+      "max": 48900.0
     }
   ],
-  "duplicate_rows_pct": 0.012984881576592429,
-  "cross_label_duplicate_pct": 0.0
+  "duplicate_pct": 95.38313030663414
 }

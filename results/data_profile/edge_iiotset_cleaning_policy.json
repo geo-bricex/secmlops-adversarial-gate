@@ -1,0 +1,26 @@
+{
+  "canonical_rows": 18752706,
+  "structural_malformed_removed": 4,
+  "semantic_inconsistent_rows_detected": 158515,
+  "semantic_inconsistent_pct": 0.8452913408870165,
+  "strategy_selected": "REMOVE_FEATURE_PLUS_SEMANTIC_ROW_EXCLUSION",
+  "features_removed": [
+    "tcp.dstport"
+  ],
+  "reason_per_removed_feature": {
+    "tcp.dstport": "Dominant source of nonnumeric tokens (155549); port field contains non-port flag representations and no inequivalent normalization is justified."
+  },
+  "normalization_rules": [],
+  "semantic_rows_removed": 3361,
+  "final_feature_count": 22,
+  "post_feature_removal_rows": 18752706,
+  "final_clean_universe_rows": 18749345,
+  "residual_semantic_pct": 0.017922746722526337,
+  "nonnumeric_numeric_features_after_exclusion": 0,
+  "residual_binary_shift_pp": 0.01956110806009309,
+  "residual_max_attack_type_removed_pct": 31.082180634662326,
+  "threshold_global_pass": true,
+  "threshold_binary_balance_pass": true,
+  "threshold_attack_type_pass": false,
+  "initial_features": 23
+}

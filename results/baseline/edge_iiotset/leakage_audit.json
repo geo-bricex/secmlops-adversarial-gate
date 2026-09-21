@@ -1,0 +1,202 @@
+{
+  "raw_feature_count": 22,
+  "transformed_feature_count": 38,
+  "raw_to_transformed_mapping": [
+    {
+      "raw_feature": "arp.opcode",
+      "transformer": "numeric impute+scale",
+      "output_features": [
+        "numeric__arp.opcode"
+      ]
+    },
+    {
+      "raw_feature": "arp.hw.size",
+      "transformer": "numeric impute+scale",
+      "output_features": [
+        "numeric__arp.hw.size"
+      ]
+    },
+    {
+      "raw_feature": "http.content_length",
+      "transformer": "numeric impute+scale",
+      "output_features": [
+        "numeric__http.content_length"
+      ]
+    },
+    {
+      "raw_feature": "http.response",
+      "transformer": "numeric impute+scale",
+      "output_features": [
+        "numeric__http.response"
+      ]
+    },
+    {
+      "raw_feature": "tcp.connection.fin",
+      "transformer": "numeric impute+scale",
+      "output_features": [
+        "numeric__tcp.connection.fin"
+      ]
+    },
+    {
+      "raw_feature": "tcp.connection.rst",
+      "transformer": "numeric impute+scale",
+      "output_features": [
+        "numeric__tcp.connection.rst"
+      ]
+    },
+    {
+      "raw_feature": "tcp.len",
+      "transformer": "numeric impute+scale",
+      "output_features": [
+        "numeric__tcp.len"
+      ]
+    },
+    {
+      "raw_feature": "tcp.srcport",
+      "transformer": "numeric impute+scale",
+      "output_features": [
+        "numeric__tcp.srcport"
+      ]
+    },
+    {
+      "raw_feature": "udp.port",
+      "transformer": "numeric impute+scale",
+      "output_features": [
+        "numeric__udp.port"
+      ]
+    },
+    {
+      "raw_feature": "udp.time_delta",
+      "transformer": "numeric impute+scale",
+      "output_features": [
+        "numeric__udp.time_delta"
+      ]
+    },
+    {
+      "raw_feature": "dns.qry.name.len",
+      "transformer": "numeric impute+scale",
+      "output_features": [
+        "numeric__dns.qry.name.len"
+      ]
+    },
+    {
+      "raw_feature": "dns.qry.qu",
+      "transformer": "numeric impute+scale",
+      "output_features": [
+        "numeric__dns.qry.qu"
+      ]
+    },
+    {
+      "raw_feature": "mqtt.len",
+      "transformer": "numeric impute+scale",
+      "output_features": [
+        "numeric__mqtt.len"
+      ]
+    },
+    {
+      "raw_feature": "mqtt.msgtype",
+      "transformer": "numeric impute+scale",
+      "output_features": [
+        "numeric__mqtt.msgtype"
+      ]
+    },
+    {
+      "raw_feature": "mqtt.proto_len",
+      "transformer": "numeric impute+scale",
+      "output_features": [
+        "numeric__mqtt.proto_len"
+      ]
+    },
+    {
+      "raw_feature": "mqtt.topic_len",
+      "transformer": "numeric impute+scale",
+      "output_features": [
+        "numeric__mqtt.topic_len"
+      ]
+    },
+    {
+      "raw_feature": "mqtt.ver",
+      "transformer": "numeric impute+scale",
+      "output_features": [
+        "numeric__mqtt.ver"
+      ]
+    },
+    {
+      "raw_feature": "mbtcp.len",
+      "transformer": "numeric impute+scale",
+      "output_features": [
+        "numeric__mbtcp.len"
+      ]
+    },
+    {
+      "raw_feature": "http.request.method",
+      "transformer": "categorical one-hot",
+      "output_features": [
+        "categorical__http.request.method_0",
+        "categorical__http.request.method_0.0",
+        "categorical__http.request.method_GET"
+      ]
+    },
+    {
+      "raw_feature": "http.request.version",
+      "transformer": "categorical one-hot",
+      "output_features": [
+        "categorical__http.request.version_0",
+        "categorical__http.request.version_0.0",
+        "categorical__http.request.version_HTTP/1.0",
+        "categorical__http.request.version_HTTP/1.1"
+      ]
+    },
+    {
+      "raw_feature": "tcp.flags",
+      "transformer": "categorical one-hot",
+      "output_features": [
+        "categorical__tcp.flags_0",
+        "categorical__tcp.flags_0.0",
+        "categorical__tcp.flags_0x00000002",
+        "categorical__tcp.flags_0x00000004",
+        "categorical__tcp.flags_0x00000010",
+        "categorical__tcp.flags_0x00000011",
+        "categorical__tcp.flags_0x00000012",
+        "categorical__tcp.flags_0x00000018",
+        "categorical__tcp.flags_0x00000019",
+        "categorical__tcp.flags_1.0"
+      ]
+    },
+    {
+      "raw_feature": "mqtt.protoname",
+      "transformer": "categorical one-hot",
+      "output_features": [
+        "categorical__mqtt.protoname_0",
+        "categorical__mqtt.protoname_0.0",
+        "categorical__mqtt.protoname_MQTT"
+      ]
+    }
+  ],
+  "forbidden_feature_lineage": [],
+  "fingerprint_overlap": {
+    "train_validation": 0,
+    "train_test": 0,
+    "validation_test": 0
+  },
+  "exact_vector_overlap": {
+    "train_validation": 0,
+    "train_test": 0,
+    "validation_test": 0
+  },
+  "target_in_X": false,
+  "Attack_type_in_X": false,
+  "source_file_in_X": false,
+  "fingerprint_in_X": false,
+  "tcp_dstport_in_X": false,
+  "audit_models_validation": {
+    "dummy": 0.5579037193581291,
+    "linear": 0.9999266661777745,
+    "shallow_tree": 0.9881932546216975,
+    "label_shuffle_linear_validation_accuracy": 0.5579037193581291
+  },
+  "preprocessing_train_only": true,
+  "test_isolation": true,
+  "leakage_conclusion": "POTENTIAL_LEAKAGE",
+  "reason": "Perfect held-out performance plus feature-level/source-scenario proxy risk requires a human-reviewed methodological decision before further Edge seeds."
+}

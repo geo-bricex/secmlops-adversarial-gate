@@ -1,0 +1,12 @@
+{
+  "post_feature_removal_rows": 18752706,
+  "semantic_rows_removed": 3361,
+  "final_clean_universe_rows": 18749345,
+  "residual_semantic_pct": 0.017922746722526337,
+  "residual_binary_shift_pp": 0.01956110806009309,
+  "residual_max_attack_type_removed_pct": 31.082180634662326,
+  "threshold_global_pass": true,
+  "threshold_binary_balance_pass": true,
+  "threshold_attack_type_pass": false,
+  "nonnumeric_numeric_features_after_exclusion": 0
+}

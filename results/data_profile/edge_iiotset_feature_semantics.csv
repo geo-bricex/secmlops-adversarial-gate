@@ -26,7 +26,7 @@ tcp.connection.fin,object,NUMERIC,IMMUTABLE,0.0,1.0,4,not in independent attack 
 tcp.connection.rst,object,NUMERIC,IMMUTABLE,0.0,1.0,2,not in independent attack mask,frozen numeric model feature
 tcp.connection.syn,object,REMOVED,REMOVE,0.0,1440.0,3,none,not selected in the frozen model feature set
 tcp.connection.synack,object,REMOVED,REMOVE,0.0,64666.0,166,none,not selected in the frozen model feature set
-tcp.dstport,object,NUMERIC,IMMUTABLE,0.0,65535.0,71597,not in independent attack mask,frozen numeric model feature
+tcp.dstport,object,REMOVED,REMOVE,0.0,65535.0,71597,semantic contract exclusion,dominant nonnumeric port representations; removed under minimal feature removal
 tcp.flags,object,CATEGORICAL,IMMUTABLE,,,12,train vocabulary only,frozen categorical model feature
 tcp.flags.ack,object,REMOVED,REMOVE,0.0,5900.0,592,none,not selected in the frozen model feature set
 tcp.len,object,CONDITIONALLY_MUTABLE,CONDITIONALLY_MUTABLE,0.0,65228.0,1213,joint feasibility projection required,frozen conditional attack candidate

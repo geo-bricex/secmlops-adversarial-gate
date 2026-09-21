@@ -1,0 +1,13 @@
+{
+  "dataset": "edge_iiotset",
+  "feature_contract_count": 22,
+  "forbidden_feature_lineage": [],
+  "fingerprint_overlap_train_validation": 0,
+  "fingerprint_overlap_train_test": 0,
+  "fingerprint_overlap_validation_test": 0,
+  "preprocessing_fit_scope": "TRAIN_ONLY",
+  "test_used_after_checkpoint_selection": true,
+  "status": "PASS",
+  "leakage_conclusion": "NO_DIRECT_LEAKAGE_WITH_DATASET_CONFOUNDING",
+  "interpretation": "Perfect performance is retained as a dataset-confinement finding, not mitigated by removing legitimate traffic features."
+}

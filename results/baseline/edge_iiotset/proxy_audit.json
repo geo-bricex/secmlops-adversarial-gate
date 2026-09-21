@@ -1,0 +1,42 @@
+{
+  "source_file_structure": "Canonical raw source files are scenario/class-associated by dataset construction; source_file is excluded from X.",
+  "most_predictive_features": [
+    "tcp.len",
+    "mqtt.msgtype",
+    "mqtt.len",
+    "mqtt.topic_len",
+    "tcp.srcport"
+  ],
+  "features_classified_LEGITIMATE_SIGNAL": [
+    "arp.opcode",
+    "arp.hw.size",
+    "http.content_length",
+    "http.response",
+    "tcp.connection.fin",
+    "tcp.connection.rst",
+    "tcp.len",
+    "tcp.srcport",
+    "udp.port",
+    "udp.time_delta",
+    "dns.qry.name.len",
+    "dns.qry.qu",
+    "mqtt.len",
+    "mqtt.msgtype",
+    "mqtt.proto_len",
+    "mqtt.topic_len",
+    "mqtt.ver",
+    "mbtcp.len",
+    "http.request.method",
+    "http.request.version",
+    "tcp.flags",
+    "mqtt.protoname"
+  ],
+  "features_classified_SOURCE_PROXY_ARTIFACT": [],
+  "features_classified_CONFIRMED_LEAKAGE": [],
+  "target_leakage": false,
+  "split_leakage": false,
+  "preprocessing_leakage": false,
+  "source_scenario_associations": true,
+  "final_leakage_conclusion": "NO_DIRECT_LEAKAGE_WITH_DATASET_CONFOUNDING",
+  "seed_42_accepted": true
+}

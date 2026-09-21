@@ -19,6 +19,6 @@ feature_policy:
   semantically_constrained: [tcp.srcport, tcp.dstport, udp.port, udp.time_delta, tcp.len, http.content_length, mqtt.len, mbtcp.len]
   mutable: []
   note: No feature is independently mutable; constrained attacks require joint projection.
-  model_numeric: [arp.opcode, arp.hw.size, http.content_length, http.response, tcp.connection.fin, tcp.connection.rst, tcp.dstport, tcp.len, tcp.srcport, udp.port, udp.time_delta, dns.qry.name.len, dns.qry.qu, mqtt.len, mqtt.msgtype, mqtt.proto_len, mqtt.topic_len, mqtt.ver, mbtcp.len]
+  model_numeric: [arp.opcode, arp.hw.size, http.content_length, http.response, tcp.connection.fin, tcp.connection.rst, tcp.len, tcp.srcport, udp.port, udp.time_delta, dns.qry.name.len, dns.qry.qu, mqtt.len, mqtt.msgtype, mqtt.proto_len, mqtt.topic_len, mqtt.ver, mbtcp.len]
   model_categorical: [http.request.method, http.request.version, tcp.flags, mqtt.protoname]
   attack_conditionally_mutable: [udp.time_delta, http.content_length, tcp.len, mqtt.len, mbtcp.len, dns.qry.name.len]

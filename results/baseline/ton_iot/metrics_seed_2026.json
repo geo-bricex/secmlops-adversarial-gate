@@ -1,0 +1,40 @@
+{
+  "accuracy": 0.9913898708480627,
+  "precision": 0.992705303199821,
+  "attack_recall": 0.9962721760610824,
+  "f1": 0.9944855413584398,
+  "roc_auc": 0.9984466830466481,
+  "pr_auc": 0.9995324762782842,
+  "mcc": 0.9748886731310242,
+  "specificity": 0.974151601649223,
+  "tp": 22182,
+  "tn": 6143,
+  "fp": 163,
+  "fn": 83,
+  "false_positive_rate": 0.025848398350777037,
+  "false_negative_rate": 0.0037278239389175838,
+  "confusion_matrix": [
+    [
+      6143,
+      163
+    ],
+    [
+      83,
+      22182
+    ]
+  ],
+  "dataset": "ton_iot",
+  "seed": 2026,
+  "threshold": 0.5,
+  "best_epoch": 15,
+  "epochs": 15,
+  "preprocessing_seconds": 0.9531257152557373,
+  "training_seconds": 41.460999488830566,
+  "inference_seconds": 0.011740922927856445,
+  "test_seconds": 0.011740922927856445,
+  "total_seconds": 42.42586612701416,
+  "feature_count": 50,
+  "leakage_alarm": true,
+  "device": "cpu",
+  "ram_mb": 671.2265625
+}

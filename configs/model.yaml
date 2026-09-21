@@ -3,7 +3,6 @@ model:
   hidden_layers: [128, 64]
   dropout: 0.2
   learning_rate: 0.001
-  batch_size: 1024
-  max_epochs: 50
-  early_stopping_patience: 5
-
+  batch_size: 4096
+  max_epochs: 15
+  early_stopping_patience: 3
