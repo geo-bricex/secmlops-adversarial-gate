@@ -35,6 +35,10 @@ results/**/*.duckdb*
 !results/figures/baseline/*.svg
 !results/adversarial/**/*.csv
 !results/adversarial/**/*.json
+!results/security_gate/**/*.csv
+!results/security_gate/**/*.json
+!results/final/**/*.csv
+!results/final/**/*.json
 !results/**/.gitkeep
 *.pt
 *.pth

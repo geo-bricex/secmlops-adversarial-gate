@@ -1,0 +1,19 @@
+{
+  "dataset": "cic_iot_2023",
+  "seed": 2026,
+  "decision": "PASS",
+  "clean_attack_recall": 0.9890834300179306,
+  "worst_adv_attack_recall": 0.987026684948845,
+  "max_ASR": 0.002079445481205012,
+  "max_recall_drop": 0.002056745069085597,
+  "semantic_violations": 0,
+  "leakage_status": "NO_EVIDENCE_OF_LEAKAGE",
+  "failed_criteria": "",
+  "warnings": "",
+  "policy_id": "projected-evasion-ids-v1",
+  "reason_codes": [
+    "PASS_ALL_CRITERIA"
+  ],
+  "policy_hash": "26886d6ef2c44cf91f5b6234f50b3727376107b1088ea551a21fb9efb03c0aba",
+  "timestamp": 1790031706.0055687
+}

@@ -1,0 +1,2 @@
+artifact_a,artifact_b,field,value_a,value_b,severity,category,source_of_truth,repair_action,status
+phase3_manifest.csv,per-condition test metrics,artifact_path,validation_sanity paths,test metrics paths,MEDIUM,MANIFEST_STATUS_MISMATCH,per-condition metrics.json,regenerated manifest from test artifacts,REPAIRED

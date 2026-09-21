@@ -1,0 +1,21 @@
+{
+  "dataset": "edge_iiotset",
+  "seed": 42,
+  "decision": "BLOCK",
+  "clean_attack_recall": 1.0,
+  "worst_adv_attack_recall": 0.0004900390146446275,
+  "max_ASR": 0.9995099609853554,
+  "max_recall_drop": 0.9995099609853554,
+  "semantic_violations": 0,
+  "leakage_status": "NO_DIRECT_LEAKAGE_WITH_DATASET_CONFOUNDING",
+  "failed_criteria": "BLOCK_LOW_ROBUST_RECALL;BLOCK_HIGH_ATTACK_SUCCESS_RATE;BLOCK_EXCESSIVE_RECALL_DROP",
+  "warnings": "WARNING_DATASET_CONFOUNDING",
+  "policy_id": "projected-evasion-ids-v1",
+  "reason_codes": [
+    "BLOCK_LOW_ROBUST_RECALL",
+    "BLOCK_HIGH_ATTACK_SUCCESS_RATE",
+    "BLOCK_EXCESSIVE_RECALL_DROP"
+  ],
+  "policy_hash": "26886d6ef2c44cf91f5b6234f50b3727376107b1088ea551a21fb9efb03c0aba",
+  "timestamp": 1790031706.0096867
+}

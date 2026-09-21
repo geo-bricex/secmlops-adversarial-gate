@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "phase2_clean_runs": "9/9",
+  "phase3_test_conditions": "54/54",
+  "tolerance": 1e-09,
+  "repaired_derived_artifacts": [
+    "phase3_manifest.csv"
+  ]
+}

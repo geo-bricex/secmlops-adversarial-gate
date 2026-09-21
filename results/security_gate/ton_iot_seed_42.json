@@ -1,0 +1,21 @@
+{
+  "dataset": "ton_iot",
+  "seed": 42,
+  "decision": "BLOCK",
+  "clean_attack_recall": 0.9962787116643141,
+  "worst_adv_attack_recall": 0.5227768510201463,
+  "max_ASR": 0.4752704791344668,
+  "max_recall_drop": 0.4735018606441679,
+  "semantic_violations": 0,
+  "leakage_status": "NO_EVIDENCE_OF_LEAKAGE",
+  "failed_criteria": "BLOCK_LOW_ROBUST_RECALL;BLOCK_HIGH_ATTACK_SUCCESS_RATE;BLOCK_EXCESSIVE_RECALL_DROP",
+  "warnings": "",
+  "policy_id": "projected-evasion-ids-v1",
+  "reason_codes": [
+    "BLOCK_LOW_ROBUST_RECALL",
+    "BLOCK_HIGH_ATTACK_SUCCESS_RATE",
+    "BLOCK_EXCESSIVE_RECALL_DROP"
+  ],
+  "policy_hash": "26886d6ef2c44cf91f5b6234f50b3727376107b1088ea551a21fb9efb03c0aba",
+  "timestamp": 1790031706.0221634
+}
