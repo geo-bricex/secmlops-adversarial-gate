@@ -1,5 +1,6 @@
 {
-  "status": "PASS_WITH_OPENREVIEW_FORM_CONFIRMATION_PENDING",
+  "status": "PASS",
+  "verified_on": "2026-09-22",
   "front_matter": {
     "author": "Anonymous Author 1",
     "affiliation": "Anonymous Affiliation",

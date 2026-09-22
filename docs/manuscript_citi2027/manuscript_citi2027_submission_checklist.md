@@ -3,9 +3,9 @@
 ## Manuscript package
 
 - [x] English research manuscript uses the official Springer Computer Science Proceedings `llncs` class and `splncs04` bibliography style applicable to CCIS.
-- [x] The rendered PDF is 12 pages, including figures, tables, and references; the stated limit is 12–15 pages.
+- [x] The rendered PDF is 15 pages, including figures, tables, and references; the stated limit is 12–15 pages.
 - [x] Title, abstract, research question, contributions, evidence, limitations, and conclusions are mutually aligned.
-- [x] Four figures and five tables are cited in order in the body.
+- [x] Four figures and six tables are cited in order in the body.
 - [x] The PDF opens successfully and has no unresolved citations or references.
 - [x] All reported experimental results trace to reconciled Phase 5 artifacts.
 - [x] No Phase 2–5 experiment, policy, threshold, sample, model, or conclusion was modified.
@@ -23,7 +23,7 @@
 
 - [x] Reference records were checked against publisher, conference, DOI, OpenReview, or arXiv records.
 - [x] Foundational FGSM and PGD sources and original dataset papers are retained rather than replaced by secondary citations.
-- [x] Recent references are reported transparently as 7/12 (58.3%, 2022–2026); no artificial references were added merely to inflate the percentage.
+- [x] Recent references are reported transparently as 19/24 (79.2%, late 2022–2026); each added source supports a substantive methodological, governance, validity, or comparative claim.
 - [x] No Q1 quartile claim is made in the manuscript, so no unverified quartile label is presented.
 - [x] The literature matrix supports the bounded knowledge-gap statement.
 - [x] Claims, references, and visuals have separate audit files in `results/final/`.
@@ -31,7 +31,7 @@
 ## Final manual actions (not performed automatically)
 
 - [ ] Reconfirm the call text and deadline immediately before upload.
-- [ ] Inspect the PDF in the OpenReview preview and confirm its page count remains 12.
+- [ ] Inspect the PDF in the OpenReview preview and confirm its page count remains 15.
 - [ ] Complete the form's conflict, subject-area, keyword, licence, and author declarations truthfully.
 - [ ] Do not upload supplementary material unless the current call explicitly permits it.
 - [ ] Do not submit automatically; submission remains an author-controlled action.

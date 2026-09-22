@@ -3,9 +3,11 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{amsmath}
+\usepackage{array}
 \usepackage{url}
 \usepackage{pgfplots}
-\usetikzlibrary{patterns}
+\usepgfplotslibrary{groupplots}
+\usetikzlibrary{arrows.meta,fit,patterns,positioning,shapes.geometric}
 \pgfplotsset{compat=1.18}
 \emergencystretch=2em
 \begin{document}
@@ -17,98 +19,164 @@
 \maketitle
 
 \begin{abstract}
-Machine-learning intrusion detection systems can satisfy conventional clean-data criteria while remaining vulnerable to evasion. This paper evaluates an adversarial Security Gate that makes robustness an explicit, auditable condition for model promotion in a machine learning operations pipeline. Nine multilayer perceptrons were trained with three seeds on independently prepared CICIoT2023, Edge-IIoTset, and ToN\_IoT populations. Targeted FGSM and PGD attacks were evaluated at 1\%, 3\%, and 5\% of train-derived feature ranges under dataset-specific masks, bounds, and semantic projection. A validation-only policy combined clean attack recall, worst-case adversarial recall, attack success rate, degradation, and integrity checks. All nine models passed the clean-only criterion, whereas the frozen Security Gate blocked four: all three Edge-IIoTset models and one ToN\_IoT model. Mean worst-case attack recall was $0.9864$ for CICIoT2023, $0.0008$ for Edge-IIoTset, and $0.7793$ for ToN\_IoT. No semantic violations or split-fingerprint overlaps were observed. The results show that, within the evaluated threat model, adversarial validation can materially change promotion decisions that clean metrics alone would accept.
-\keywords{MLOps \and adversarial robustness \and intrusion detection \and security gate \and IoT security}
+Clean-data validation can promote an intrusion-detection model without testing whether operationally influenceable inputs permit evasion. Prior work studies secure machine-learning lifecycles and realistic adversarial evaluation, but provides limited multi-dataset evidence about connecting both to a frozen, auditable promotion rule. We evaluate such a Security Gate using nine multilayer perceptrons trained with three seeds on independently prepared CICIoT2023, Edge-IIoTset, and ToN\_IoT populations. Targeted FGSM and PGD attacks use 1\%, 3\%, and 5\% of train-derived feature ranges, dataset-specific attack masks, bounds, and semantic projection. A validation-only policy combines clean attack recall, worst-case adversarial recall, attack success rate, recall degradation, and integrity checks. All nine candidates pass the clean-only rule, whereas the frozen gate blocks four: all three Edge-IIoTset models and one ToN\_IoT model. Mean worst-case attack recall is $0.9864$ for CICIoT2023, $0.0008$ for Edge-IIoTset, and $0.7793$ for ToN\_IoT. No semantic violations or split-fingerprint overlaps are recorded. Thus, under the evaluated projected feature-space threat model, adversarial evidence changes promotion eligibility that clean evaluation alone would not question; it does not establish packet-level realizability or guarantee deployment security.
+\keywords{SecMLOps \and model promotion \and constraint-aware evasion \and robustness auditing \and model governance}
 \end{abstract}
 
 \section{Introduction}
-Internet of Things (IoT) and Industrial IoT (IIoT) infrastructures expose heterogeneous devices and services to network attacks. Learning-based intrusion detection systems (IDSs) can extract patterns from this traffic, but their operational value depends on more than high held-out accuracy. The model, data transformation, evaluation evidence, and promotion decision must remain reproducible as they move through a machine learning operations (MLOps) lifecycle. MLOps addresses this lifecycle through versioning, automation, tracking, and continuous evaluation \cite{kreuzberger2023mlops}; recent SecMLOps work further argues that security controls must be integrated throughout that lifecycle rather than appended after deployment \cite{zhang2022secmlops,zhang2026secmlops}.
+Internet of Things (IoT) and Industrial IoT (IIoT) infrastructures combine heterogeneous devices, protocols, and services, creating a broad and changing attack surface. Learning-based intrusion detection systems (IDSs) can classify patterns that fixed signatures miss, yet a high held-out score is only one condition for operational use. Data preparation, model selection, evaluation, and the decision to release a model must remain reproducible as the system evolves. Machine learning operations (MLOps) organizes this lifecycle through automation, versioning, experiment tracking, and continuous evaluation \cite{kreuzberger2023mlops}. Empirical model-management research also shows that documentation, reproducibility, and versioned assets remain practical concerns after model development \cite{latendresse2025management}.
 
-Conventional model promotion commonly relies on clean validation metrics. That evidence is necessary, but it does not answer whether a malicious actor can manipulate operationally influenceable traffic attributes to make attack traffic appear benign. The Fast Gradient Sign Method (FGSM) established an efficient first-order construction of adversarial inputs \cite{goodfellow2015fgsm}, while projected-gradient methods provide iterative optimization inside a bounded set \cite{madry2018pgd}. Directly transferring these methods from images to tabular network data is problematic: categorical values, immutable identifiers, discrete variables, cross-feature relationships, and protocol semantics restrict feasible modifications. Reviews of adversarial network intrusion detection consequently identify realism and domain constraints as central unresolved concerns \cite{vitorino2023sok}. Work on tabular robustness likewise shows that norm-bounded similarity alone may poorly represent attacker capability \cite{kireev2023cost}, and recent constrained attacks explicitly model immutability and feature relationships \cite{simonetto2024caa}.
+Security adds a distinct requirement. An IDS can satisfy a clean validation threshold while relying on a small set of traffic features that an adversary can influence at inference time. FGSM introduced an efficient first-order adversarial construction \cite{goodfellow2015fgsm}, and projected-gradient methods iteratively optimize within a bounded region \cite{madry2018pgd}. These attacks provide useful diagnostic tools, but conventional norm bounds were developed largely for perceptual domains. A network-flow record contains integers, categories, immutable identifiers, protocol-dependent fields, and derived quantities. Modifying them independently may create a vector that fools a classifier but does not describe coherent traffic.
 
-These research lines establish complementary needs. SecMLOps provides lifecycle-wide security concepts, while adversarial IDS and tabular-robustness studies provide methods for robustness assessment. The reviewed literature, however, offers limited empirical evidence on using semantically constrained adversarial results as a deterministic model-promotion decision across heterogeneous IoT/IIoT datasets. The gap is not the absence of MLOps or adversarial evaluation individually; it is the reproducible connection between constrained evaluation, a validation-calibrated policy, and an auditable promotion outcome.
+Recent evidence makes both the security and realism problems concrete. A study of 139 industrial practitioners found that ML security concerns and defenses are shaped by experienced or anticipated exposure, while also identifying a need for stronger auditing practice \cite{grosse2023industry}. In network intrusion detection, a systematization of knowledge concludes that many adversarial methods do not account for communication-network constraints \cite{vitorino2023sok}. Constraint-aware NIDS experiments further show that mutability, value, dependency, and distribution constraints can materially change attack success \cite{alhussien2024constraining}. Robustness numbers therefore have little operational meaning unless the threat model states what can change, how candidates are projected, and what validity was checked.
 
-This study asks: \emph{How effectively can an automated adversarial security gate integrated into an MLOps pipeline identify insufficiently robust intrusion-detection models before production deployment across heterogeneous IoT/IIoT datasets?} We make five contributions. First, we instantiate a reproducible Security Gate that combines clean performance, worst-case robustness, degradation, and experiment-integrity checks. Second, we define a projected constrained tabular evasion protocol in which gradients operate in model space but every candidate is restricted to dataset-specific feasible features. Third, we evaluate nine models over CICIoT2023, Edge-IIoTset, and ToN\_IoT. Fourth, we quantify how clean-only and security-aware promotion differ. Fifth, we record operational overhead, hashes, configurations, and reason codes for auditability. We do not present MLOps, FGSM, PGD, or the classifier as new algorithms; the contribution is their evaluated integration as a pre-promotion control.
+Secure MLOps (SecMLOps) addresses the lifecycle side of the problem. It treats security as a cross-cutting concern rather than a post-deployment add-on \cite{zhang2022secmlops,zhang2026secmlops}. Risk-management guidance similarly separates measurement from an organization's decision about acceptable risk \cite{tabassi2023airmf,vassilev2025taxonomy}. However, a lifecycle framework does not by itself specify which adversarial measurements should prevent promotion. Conversely, an adversarial benchmark can reveal vulnerability without defining how its evidence enters a controlled release decision. This leaves a practical and scientific question at the intersection of adversarial evaluation, model governance, and MLOps automation.
+
+Our literature comparison identifies a bounded gap: secure ML lifecycles, constrained adversarial examples, IDS defenses, and tabular benchmarks are well studied, but evidence remains limited on applying a frozen, validation-derived promotion policy to constrained results across independent IoT/IIoT datasets. This does not imply that no industrial integration exists; it identifies what the examined peer-reviewed evidence does not evaluate.
+
+This study asks: \emph{How effectively can an automated adversarial Security Gate integrated into an MLOps pipeline identify insufficiently robust intrusion-detection models before production deployment across heterogeneous IoT/IIoT datasets?} Effectiveness is the additional promotion information produced under a fixed threat model and policy. We contribute an auditable pre-promotion gate; a projected, dataset-specific evasion protocol; a three-dataset, three-seed evaluation; and a traceable comparison of clean-only and security-aware decisions and cost. MLOps, FGSM, PGD, and the MLP are established components; their evaluated connection is the contribution.
 
 \section{Related Work}
-\paragraph{MLOps and security integration.} MLOps research describes roles, components, and workflows for repeatable model development and operation \cite{kreuzberger2023mlops}. SecMLOps extends this view to security, governance, and compliance \cite{zhang2022secmlops}. A recent comprehensive framework maps threats and controls across the lifecycle and illustrates trade-offs between security and operational performance \cite{zhang2026secmlops}. These works motivate security-by-design, but they do not supply the same evaluated decision mechanism used here: a frozen, metric-based gate for adversarial IDS promotion across multiple network datasets.
+\paragraph{Security across the ML lifecycle.}
+MLOps architectures make data, code, model, and deployment transitions explicit \cite{kreuzberger2023mlops}. Model-management evidence from 227 repositories highlights maintenance, documentation, versioning, and reproducible environments \cite{latendresse2025management}, while security surveys extend concern beyond the classifier to the surrounding software lifecycle \cite{chen2024security}. SecMLOps relates people, process, technology, governance, and compliance \cite{zhang2022secmlops} and maps controls across development and operation \cite{zhang2026secmlops}. These works locate security responsibilities; our narrower question is what decision changes when an adversarial check controls promotion.
 
-\paragraph{Adversarial evaluation of intrusion detection.} FGSM and PGD are established gradient-based attacks \cite{goodfellow2015fgsm,madry2018pgd}, and libraries such as the Adversarial Robustness Toolbox support systematic evaluation \cite{nicolae2019art}. In network intrusion detection, the central issue is not merely whether gradients produce misclassification, but whether the modified flow representation remains meaningful. Vitorino et al. \cite{vitorino2023sok} show that many adversarial techniques were not designed for communication-network constraints. Thus, unconstrained degradation can overstate operational vulnerability.
+\paragraph{Adversarial robustness in network IDSs.}
+Recent IDS research goes beyond showing that a generic perturbation can reduce accuracy. Adv-Bot generates constrained black-box botnet evasions while preserving malicious functionality in traffic traces \cite{debicha2023advbot}. A complementary analysis formalizes mutability, value, dependency, and distribution constraints, then studies attack transferability and defenses \cite{alhussien2024constraining}. These studies provide stronger problem-space or domain-aware evidence than unrestricted feature perturbation.
 
-\paragraph{Constraints in tabular feature space.} Tabular examples combine continuous, integer, categorical, immutable, and dependent attributes. Kireev et al. \cite{kireev2023cost} formulate attacker cost and utility as alternatives to image-oriented imperceptibility. Simonetto et al. \cite{simonetto2024caa} demonstrate that categorical, immutable, and relational constraints materially affect attack effectiveness. Our protocol is narrower than those general-purpose methods: it uses a conservative, manually audited set of operationally influenceable traffic features and projects after every step. This improves traceability but does not establish packet-level realizability.
+Defense work instead changes the detector: AIDTF trains against generated attacks \cite{xiong2023aidtf}, while RAIDS combines reconstruction signals and ensemble classification \cite{sarikaya2023raids}. We do not repair a candidate after evaluation; we test a frozen candidate against a frozen promotion policy. A gate governs measured risk but does not create robustness.
 
-\paragraph{IoT/IIoT evaluation data.} CICIoT2023 captures 33 attacks in a topology of 105 devices \cite{neto2023ciciot}. Edge-IIoTset targets centralized and federated IoT/IIoT security evaluation \cite{ferrag2022edge}. ToN\_IoT combines heterogeneous IoT/IIoT telemetry and network data \cite{alsaedi2020ton}. Their different collection designs are useful for cross-dataset comparison, but results are not direct estimates of deployment performance. We therefore process and evaluate them independently and retain dataset-specific limitations.
+\paragraph{Constraints in tabular feature space.}
+Tabular robustness requires a threat model that reflects heterogeneous semantics. Cost- and utility-aware formulations show why a uniform distance may not represent an attacker's capability or incentive \cite{kireev2023cost}. Robust embeddings address categorical features and transfer robustness to model families that do not naturally support gradient-based adversarial training \cite{kireev2023embeddings}. Constrained Adaptive Attack (CAA) combines gradient and search procedures while enforcing categorical, immutable, and relational constraints \cite{simonetto2024caa}. TabularBench subsequently evaluates more than 200 tabular models and several robustification mechanisms with constraint-satisfying attacks \cite{simonetto2024tabularbench}.
 
-The comparison yields the study's bounded knowledge gap: prior work supports secure ML lifecycles and constrained robustness testing, yet evidence remains limited on how their integration changes automated promotion decisions under one auditable policy. Our design evaluates that connection rather than proposing another classifier or attack.
+These methods establish that validity constraints affect measured robustness. Our narrower protocol attacks one audited traffic attribute per dataset and projects each step into its encoded domain. It favors an inspectable gate input over attack completeness and cannot bound every feasible network adversary.
 
-\section{Methodology}
-\subsection{Experimental MLOps Pipeline}
-Figure~\ref{fig:pipeline} shows the evaluated control flow. Data and feature contracts are versioned before training. Clean validation selects the stored checkpoint under a fixed training protocol. Adversarial validation then exercises the checkpoint without retraining. The Security Gate produces PASS or BLOCK plus reason codes; PASS denotes only eligibility for a later promotion process, not deployment.
+\paragraph{Evaluation validity, shift, and governance.}
+The Adversarial Robustness Toolbox supports repeatable attacks \cite{nicolae2019art}, but tool consistency does not establish threat-model validity. The NIST taxonomy requires explicit attacker goals, knowledge, capabilities, and lifecycle stage \cite{vassilev2025taxonomy}. TableShift separately shows that in-distribution tabular performance does not resolve behavior under distribution shift \cite{gardner2023tableshift}. We therefore separate within-distribution adversarial evidence from claims about unseen networks.
 
-\begin{figure}[t]
-\centering
-\setlength{\fboxsep}{4pt}
-\fbox{Data + contracts}$\rightarrow$\fbox{Leakage-safe split}$\rightarrow$\fbox{Train}\newline
-\vspace{3pt}
-$\downarrow$\hspace{15mm}\fbox{Clean validation}$\rightarrow$\fbox{Adversarial validation}$\rightarrow$\fbox{Security Gate}\newline
-\vspace{3pt}
-\hspace{42mm}$\swarrow$ PASS: promotion candidate\quad $\searrow$ BLOCK\newline
-\vspace{3pt}
-\fbox{MLflow metrics + artifacts}\quad\fbox{Configuration hashes}\quad\fbox{Audit trail}
-\caption{Evaluated MLOps flow. The gate marks promotion eligibility; it does not deploy a model.}
-\label{fig:pipeline}
-\end{figure}
+Governance frameworks recommend measuring, documenting, and managing risk throughout the lifecycle \cite{tabassi2023airmf}. They deliberately avoid prescribing one universal risk tolerance. Accordingly, our four thresholds instantiate one policy calibrated from validation evidence. PASS means that a candidate is eligible for a later promotion step under that policy; it is neither automatic deployment nor a security guarantee.
 
-All stochastic model runs use seeds 42, 123, and 2026. Experiment metadata and metrics are stored per run. No adversarial training or post-test tuning is performed. The nine clean models are frozen before adversarial evaluation, and the gate policy is frozen from validation evidence before application to test artifacts.
-
-\subsection{Datasets and Leakage-Safe Preparation}
-Table~\ref{tab:data} summarizes the independent experimental populations. CICIoT2023 and Edge-IIoTset each target one million observations; Edge reaches 999,996 because complete fingerprint groups are preserved. ToN\_IoT uses all 190,474 eligible deduplicated rows. Splits are group-aware with respect to fingerprints, and pairwise fingerprint overlap is zero. Imputation, scaling, and categorical vocabularies are fitted on TRAIN only.
+Table~\ref{tab:related} synthesizes the comparison. The literature provides mature components, but the final column exposes a recurring separation between lifecycle governance and constrained adversarial evidence. Our experiment evaluates this missing connection directly and records the resulting decision delta.
 
 \begin{table}[t]
-\caption{Dataset and experimental configuration. Raw features precede categorical expansion.}
-\label{tab:data}
+\caption{Synthesis of related research lines and the residual question addressed here.}
+\label{tab:related}
 \centering\small
-\begin{tabular}{lrrrrrrl}
+\begin{tabular}{>{\raggedright\arraybackslash}p{1.9cm}>{\raggedright\arraybackslash}p{2.9cm}>{\raggedright\arraybackslash}p{2.25cm}>{\raggedright\arraybackslash}p{4.0cm}}
 \toprule
-Dataset & Eligible/raw & Exp. $N$ & Raw $d$ & Train & Val. & Test & Duplicate policy\\
+Research area & Main evidence & Constraint scope & Residual issue for this study\\
 \midrule
-CICIoT2023 & 46,776,700 & 1,000,000 & 32 & 700,000 & 150,000 & 150,000 & deduplicate\\
-Edge-IIoTset & 18,749,345 & 999,996 & 22 & 699,997 & 149,999 & 150,000 & group-aware\\
-ToN\_IoT & 211,043 & 190,474 & 20 & 133,332 & 28,571 & 28,571 & deduplicate\\
+MLOps/ SecMLOps \cite{kreuzberger2023mlops,zhang2026secmlops} & Architectures, roles, controls & Full lifecycle; mainly conceptual & No evaluated IDS promotion rule from adversarial metrics\\
+Adversarial NIDS \cite{debicha2023advbot,alhussien2024constraining} & Realistic evasion and defense experiments & Network and domain constraints & Robustness result not connected to MLOps release state\\
+Tabular robustness \cite{simonetto2024caa,simonetto2024tabularbench} & Constraint-aware attacks and benchmarks & Feature validity and relations & Broad benchmarks, not a validation-frozen IDS gate\\
+Model governance & Risk and model-management practices \cite{tabassi2023airmf,latendresse2025management} & Documentation and lifecycle control & Risk tolerance remains context-specific\\
+This study & Nine candidates on three IDS datasets & Projected feature constraints and frozen policy & Measures clean-only versus security-aware decision change\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Edge required an explicit data-quality correction. A canonical CSV parser identified four malformed rows among 18,752,710 records. A semantic audit found 158,515 rows with inconsistent numeric fields. The dominant field, \texttt{tcp.dstport}, contained 155,549 nonnumeric representations and was removed because no unambiguous semantic normalization was defensible. Residual validation excluded 3,361 rows, leaving 18,749,345 clean canonical rows and 22 predictive features. The final sample uses group-aware fingerprint assignment and zero overlap. Leakage auditing found no target, metadata, preprocessing, or fingerprint leakage, but strong source/scenario association remained. We therefore retain the conclusion \texttt{NO\_DIRECT\_LEAKAGE\_WITH\_DATASET\_CONFOUNDING}; Edge results measure within-distribution discrimination, not cross-scenario generalization.
+\paragraph{Evaluation datasets.}
+CICIoT2023 captures 33 attacks in a topology of 105 devices \cite{neto2023ciciot}. Edge-IIoTset supports centralized and federated IoT/IIoT security experiments \cite{ferrag2022edge}, and ToN\_IoT combines heterogeneous network and telemetry sources \cite{alsaedi2020ton}. Their collection processes and class structures differ, so agreement across them is informative but does not constitute a pooled population estimate. We prepare, split, train, and interpret every dataset independently.
+
+\section{Methodology}
+\subsection{Experimental MLOps Pipeline}
+Figure~\ref{fig:pipeline} shows the evaluated control flow. Versioned data and feature contracts precede fingerprint-based splitting and train-only preprocessing. Clean validation selects a checkpoint under a fixed training protocol. Adversarial validation then evaluates that checkpoint without retraining, and the gate consumes both metric streams together with integrity evidence. This placement makes the security check part of promotion control rather than an exploratory analysis performed after release.
+
+\begin{figure}[t]
+\centering
+\resizebox{.96\textwidth}{!}{%
+\begin{tikzpicture}[
+  font=\scriptsize,
+  stage/.style={draw,rounded corners=1.5pt,minimum width=2.15cm,minimum height=.70cm,align=center,fill=gray!8},
+  evidence/.style={draw,rounded corners=1.5pt,minimum width=2.45cm,minimum height=.70cm,align=center,fill=white},
+  decision/.style={diamond,draw,aspect=2.1,align=center,inner sep=1.2pt,fill=gray!18},
+  outcome/.style={draw,minimum width=2.25cm,minimum height=.58cm,align=center},
+  flow/.style={-{Stealth[length=2mm]},thick},
+  trace/.style={-{Stealth[length=1.7mm]},dashed,gray}
+]
+\node[stage] (contracts) {Data + feature\\contracts};
+\node[stage,right=4mm of contracts] (split) {Fingerprint groups\\and 70/15/15 split};
+\node[stage,right=4mm of split] (train) {TRAIN-only fit\\and MLP training};
+\node[stage,right=4mm of train] (checkpoint) {Frozen\\checkpoint};
+\node[evidence,below=8mm of split] (clean) {Clean VALIDATION\\metrics};
+\node[evidence,right=4mm of clean] (adv) {Projected adversarial\\VALIDATION};
+\node[decision,right=5mm of adv] (gate) {Security\\Gate};
+\node[evidence,above=5mm of gate] (policy) {Validation-calibrated\\frozen policy};
+\node[outcome,below left=7mm and -1mm of gate] (pass) {PASS: promotion\\candidate};
+\node[outcome,fill=gray!35,below right=7mm and -1mm of gate] (block) {BLOCK +\\reason codes};
+\node[draw,dashed,rounded corners,below=4mm of pass,xshift=-2.5cm,minimum width=10.0cm,minimum height=.55cm,align=center] (tracebox) {MLflow metrics, hashes, configurations, and audit artifacts};
+\draw[flow] (contracts)--(split);
+\draw[flow] (split)--(train);
+\draw[flow] (train)--(checkpoint);
+\draw[flow] (checkpoint)|-(clean);
+\draw[flow] (checkpoint)--(adv);
+\draw[flow] (clean)--(gate);
+\draw[flow] (adv)--(gate);
+\draw[flow] (policy)--(gate);
+\draw[flow] (gate)--(pass);
+\draw[flow] (gate)--(block);
+\end{tikzpicture}
+}
+\caption{Evaluated MLOps control flow. Clean and constrained adversarial evidence enter one frozen Security Gate. PASS marks eligibility for a later promotion process; the experiment does not deploy a model.}
+\label{fig:pipeline}
+\end{figure}
+
+All stochastic model runs use seeds 42, 123, and 2026. Metrics, reason codes, configuration identifiers, and hashes are stored per run. No adversarial training or post-test tuning is performed. The nine clean models are frozen before adversarial evaluation, and the policy is frozen from validation evidence before application to test artifacts. Consequently, test outcomes cannot alter either the candidates or their acceptance criteria.
+
+\subsection{Datasets and Leakage-Safe Preparation}
+Table~\ref{tab:data} distinguishes source records, candidates remaining after the applicable quality/duplicate policy, and the actual experimental population. CICIoT2023 and Edge-IIoTset target one million observations; Edge reaches 999,996 because complete fingerprint groups are preserved. ToN\_IoT uses all 190,474 deduplicated records. A fingerprint is computed from predictive fields before sampling. Cross-label fingerprint groups are excluded, and all copies of a retained fingerprint are assigned to one split. Pairwise TRAIN--VALIDATION--TEST fingerprint overlap is therefore zero. Imputation, scaling, and categorical vocabularies are fitted on TRAIN only and then reused unchanged.
+
+\begin{table}[t]
+\caption{Dataset populations, raw feature contracts, and realized 70/15/15 splits.}
+\label{tab:data}
+\centering\small
+\setlength{\tabcolsep}{2.8pt}
+\begin{tabular}{lrrrrrrr}
+\toprule
+Dataset & Source $N$ & Candidate $N$ & Exp. $N$ & Raw $d$ & Train & Val. & Test\\
+\midrule
+CICIoT2023 & 46,776,700 & 21,055,368$^{a}$ & 1,000,000 & 32 & 700,000 & 150,000 & 150,000\\
+Edge-IIoTset & 18,752,710 & 18,749,345$^{b}$ & 999,996 & 22 & 699,997 & 149,999 & 150,000\\
+ToN\_IoT & 211,043 & 190,474$^{c}$ & 190,474 & 20 & 133,332 & 28,571 & 28,571\\
+\bottomrule
+\end{tabular}
+\parbox{\textwidth}{\footnotesize $^{a}$Class-wise deduplicated candidates before excluding cross-label fingerprint groups; $^{b}$canonical rows after malformed and residual semantic exclusions; $^{c}$unique fingerprints. Raw $d$ is measured after the final feature contract and before categorical expansion.}
+\end{table}
+
+Edge required an explicit data-quality correction. A canonical CSV parser identified four malformed rows among 18,752,710 records. A semantic audit found 158,515 rows with inconsistent numeric fields. The dominant field, \texttt{tcp.dstport}, contained 155,549 nonnumeric representations and was removed because no unambiguous semantic normalization was defensible. Residual validation excluded 3,361 rows, leaving 18,749,345 clean canonical rows and 22 predictive features. The final sample uses group-aware fingerprint assignment and zero overlap. Leakage auditing found no target, metadata, preprocessing, or fingerprint leakage, but strong source/scenario association remained. We therefore retain the exact audit conclusion \texttt{NO\_DIRECT\_LEAKAGE\_WITH\_DATASET\_CONFOUNDING}. Edge results measure discrimination within the sampled capture structure, not cross-scenario generalization.
 
 \subsection{Clean IDS Models}
-Each binary IDS is the same multilayer perceptron: 128- and 64-unit hidden layers, ReLU activations, dropout 0.2, and a two-logit output. Training uses cross-entropy loss, Adam at $10^{-3}$, batch size 4096, at most 15 epochs, and early-stopping patience 3. The raw contracts expand to 36, 38, and 50 model inputs for CICIoT2023, Edge-IIoTset, and ToN\_IoT, respectively. The distinction between raw feature count and transformed input dimension is maintained throughout. Test data are loaded after checkpoint selection.
+Each binary IDS uses the same MLP: 128- and 64-unit hidden layers, rectified linear activations, dropout 0.2, and a two-logit output. Training uses cross-entropy loss, Adam at $10^{-3}$, batch size 4096, at most 15 epochs, and early-stopping patience 3. Seeds control initialization and data-loader randomness. The checkpoint with the lowest validation loss is retained. The raw contracts expand to 36, 38, and 50 model inputs for CICIoT2023, Edge-IIoTset, and ToN\_IoT, respectively. Test data remain unavailable to fitting and checkpoint selection.
 
 \subsection{Projected Constrained Threat Model}
-The initial mutable-continuous-only model was infeasible because the audited contracts exposed no valid continuous mutable feature for all datasets. We therefore adopted \emph{projected constrained tabular evasion}. A raw feature is attackable only if it represents an operationally influenceable traffic attribute, is not an identifier or label, and has a deterministic projection back to its valid domain. The conservative final masks contain \texttt{Time\_To\_Live} for CICIoT2023 (integer rounding and TRAIN bounds), \texttt{udp.time\_delta} for Edge (TRAIN-bound clipping), and \texttt{duration} for ToN\_IoT (TRAIN-bound clipping). All categorical one-hot outputs and other dimensions remain unchanged.
+The final threat model is \texttt{PROJECTED\_CONSTRAINED\_TABULAR\_EVASION}: a white-box adversary knows the model and preprocessing, modifies test-time attack records, and targets BENIGN classification. Training data, labels, code, model parameters, categorical indicators, identifiers, and non-masked features are immutable. The initial mutable-continuous-only specification was infeasible because the audited contracts exposed no universally valid continuous feature. We therefore selected one feature per dataset only when it represented an operationally influenceable traffic quantity and admitted deterministic projection. The masks contain \texttt{Time\_To\_Live} for CICIoT2023, \texttt{udp.time\_delta} for Edge, and \texttt{duration} for ToN\_IoT. TTL is rounded to its integer domain; timing and duration are clipped to TRAIN bounds. These choices deliberately under-approximate attacker capability and are not claimed to span every feasible traffic manipulation.
 
 For mutable feature $j$ and relative budget $b\in\{0.01,0.03,0.05\}$,
 \begin{equation}
 \epsilon^{raw}_j=b(\max_{x\in TRAIN}x_j-\min_{x\in TRAIN}x_j),\qquad
 \epsilon^{model}_j=\epsilon^{raw}_j/s_j,
 \end{equation}
-where $s_j$ is the train-fitted standardization scale. FGSM takes one targeted step toward BENIGN. PGD uses 20 iterations, random initialization, step size $\epsilon/4$, and projection after every step. Projection enforces the attack mask, epsilon ball, TRAIN bounds, and integer domain where applicable. Only ATTACK examples are changed; BENIGN examples preserve false-positive observability. Semantic violations must equal zero.
+where $s_j$ is the train-fitted standardization scale. FGSM takes one targeted step toward BENIGN. PGD uses 20 iterations, random initialization, step size $\epsilon/4$, and projection after every step. Projection enforces the attack mask, epsilon ball, TRAIN bounds, and the integer domain where applicable. Only ATTACK examples are changed; BENIGN examples remain untouched so specificity remains observable. A condition is valid only when its semantic-violation count is zero. Compliance with these encoded constraints establishes feature-space validity, not the existence of an equivalent packet trace.
 
 A deterministic test subset is selected with seed 314159 and shared across model seeds. CIC and ToN use 20,000 records. Edge preserves selected fingerprint groups, yielding 80,861 records rather than splitting duplicated groups; this larger realized subset is reported rather than treated as 20,000. The 54 test conditions comprise three datasets, three model seeds, two attacks, and three budgets. Every condition completed.
 
 \subsection{Security Gate}
-The gate aggregates the worst valid adversarial condition for each candidate. Its frozen global policy requires clean attack recall $\geq0.95$, worst-case adversarial attack recall $\geq0.80$, maximum attack success rate (ASR) $\leq0.20$, and maximum recall drop $\leq0.20$. Hard integrity requirements include six completed adversarial conditions, zero semantic violations, zero fingerprint overlap, compatible artifacts, and no confirmed leakage. Edge's confounding status produces a warning but not an automatic block.
+The gate aggregates evidence in three steps. First, clean and adversarial artifacts must match the candidate checkpoint, feature contract, subset, and configuration. Second, the worst valid value of each robustness criterion is selected independently across the six attack/budget conditions; maximum ASR and minimum adversarial recall need not originate from the same condition. Third, a conjunctive policy emits PASS only when every metric and integrity criterion succeeds. The frozen global thresholds are clean attack recall $\geq0.95$, worst-case adversarial attack recall $\geq0.80$, maximum attack success rate (ASR) $\leq0.20$, and maximum recall drop $\leq0.20$. Integrity requirements include six completed conditions, zero semantic violations, zero fingerprint overlap, compatible artifacts, and no confirmed leakage. Edge's confounding status produces a warning but not an automatic block.
 
-Threshold sensitivity is computed using adversarial VALIDATION only. The selected policy identifier is \texttt{projected-evasion-ids-v1}; it is serialized and hashed before applying it to TEST. The policy is not changed after test results are observed. A model passes only if every criterion passes. Stable reason codes identify clean, robustness, ASR, degradation, and integrity failures.
+Threshold sensitivity is computed using adversarial VALIDATION only. The selected identifier, \texttt{projected-evasion-ids-v1}, is serialized and hashed before application to TEST. This procedure is a validation-based policy selection with sensitivity analysis, not proof that the thresholds are optimal for every organization. The policy is not changed after test results are observed. Stable reason codes identify clean, robustness, ASR, degradation, and integrity failures. PASS authorizes only consideration by a later promotion process.
 
 \subsection{Metrics and Reproducibility}
-Clean and adversarial evaluation records accuracy, precision, attack recall, specificity, F1, ROC--AUC, PR--AUC, Matthews correlation coefficient (MCC), false-positive and false-negative rates, and confusion counts. ASR is the fraction of originally correctly detected attacks that become BENIGN after perturbation. The robustness gap is clean subset attack recall minus worst-case adversarial attack recall. Mean and sample standard deviation use the three model seeds as experimental replicates; rows and attack conditions are not treated as independent replicates.
+Clean and adversarial evaluation records accuracy, precision, attack recall, specificity, F1, ROC--AUC, PR--AUC, Matthews correlation coefficient (MCC), false-positive and false-negative rates, and confusion counts. For originally correct attack examples $C$ and adversarial predictions $\hat y_i^{adv}$,
+\begin{equation}
+\mathrm{ASR}=\frac{|\{i\in C:\hat y_i^{adv}=\mathrm{BENIGN}\}|}{|C|},\qquad
+\Delta R=R_{clean,subset}-\min_a R_{adv,a}.
+\end{equation}
+The minimum ranges over valid attack/budget conditions. Mean and sample standard deviation use the three model seeds as experimental replicates; rows, batches, and attack conditions are not treated as independent replicates. With three seeds, dispersion is descriptive and no significance test is claimed.
 
-Execution used CPU-only PyTorch 2.5.1, scikit-learn 1.5.2, pandas 2.2.3, NumPy 2.1.3, ART 1.18.2, and MLflow 2.18.0 in Docker. Fingerprints, checkpoint hashes, epsilon-vector hashes, seeds, and configuration snapshots support deterministic reconstruction. The study stores metrics rather than large adversarial arrays.
+Execution used CPU-only PyTorch 2.5.1, scikit-learn 1.5.2, pandas 2.2.3, NumPy 2.1.3, ART 1.18.2, and MLflow 2.18.0 in Docker. Fingerprints, checkpoint hashes, epsilon-vector hashes, seeds, configuration snapshots, and per-run reason codes support deterministic reconstruction. The study stores metrics and provenance rather than large adversarial arrays, limiting exact sample-level reanalysis but reducing duplicated sensitive artifacts.
 
 \section{Results}
 \subsection{Clean Performance}
-Table~\ref{tab:clean} summarizes full-test clean performance. CIC and ToN show high recall and F1 across seeds. Edge is perfect on its within-distribution test set, but this result remains qualified by dataset confounding. CIC's lower MCC relative to recall reflects its class distribution and lower specificity; reporting only accuracy or recall would conceal that behavior.
+Table~\ref{tab:clean} summarizes full-test clean performance. CIC and ToN show high recall and F1 across seeds. Edge is perfect on its within-distribution test set, but this result remains qualified by dataset confounding. CIC's lower MCC relative to recall reflects its class distribution and lower specificity; reporting only accuracy or recall would conceal that behavior. These metrics establish that all candidates are plausible under conventional evaluation, which is necessary for assessing whether the gate adds decision information rather than merely rejecting poor clean models.
 
 \begin{table}[t]
 \caption{Clean full-test performance across three seeds (mean $\pm$ standard deviation).}
@@ -126,7 +194,7 @@ ToN\_IoT & $.99085\pm.00093$ & $.99563\pm.00100$ & $.99414\pm.00060$ & $.97333\p
 \end{table}
 
 \subsection{Adversarial Robustness}
-Worst-case results in Table~\ref{tab:worst} answer the central robustness question. CIC remains stable: its mean recall gap is 0.0020 and maximum ASR is approximately 0.0020. Edge changes from perfect clean subset recall to near-zero worst-case recall, with ASR approximately 0.9992. ToN is seed-sensitive; mean worst recall is 0.7793 with standard deviation 0.2228, driven by seed 42 (0.5228) versus seeds 123 (0.8909) and 2026 (0.9242). No condition reports a semantic-constraint violation.
+Worst-case results in Table~\ref{tab:worst} answer the central robustness question. CIC remains stable: its mean recall gap is 0.0020 and maximum ASR is approximately 0.0020. Edge changes from perfect clean subset recall to near-zero worst-case recall, with ASR approximately 0.9992. ToN is seed-sensitive; mean worst recall is 0.7793 with standard deviation 0.2228, driven by seed 42 (0.5228) versus seeds 123 (0.8909) and 2026 (0.9242). No condition reports a semantic-constraint violation. Because each column is reduced according to its own worst-case definition, the table does not imply that minimum recall and maximum ASR always arise from the same attack/budget condition.
 
 \begin{table}[t]
 \caption{Worst-case subset robustness across three seeds.}
@@ -148,13 +216,13 @@ Figure~\ref{fig:gap} visualizes this contrast. High clean recall does not imply 
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}
-\begin{axis}[ybar,bar width=8pt,width=.84\textwidth,height=5cm,ymin=0,ymax=1.05,ylabel={Attack recall},symbolic x coords={CIC,Edge,ToN},xtick=data,legend style={at={(0.5,-0.18)},anchor=north,legend columns=2},grid=major]
-\addplot[fill=white,draw=black,pattern=north east lines] coordinates {(CIC,.9884) (Edge,1.0) (ToN,.9957)};
-\addplot[fill=gray!55,draw=black] coordinates {(CIC,.9864) (Edge,.0008) (ToN,.7793)};
+\begin{axis}[width=.86\textwidth,height=5.3cm,ymin=0,ymax=1.06,ylabel={Attack recall},xmin=.5,xmax=3.5,xtick={1,2,3},xticklabels={CICIoT2023,Edge-IIoTset,ToN\_IoT},legend style={at={(0.5,-0.18)},anchor=north,legend columns=2},grid=major]
+\addplot[only marks,mark=o,mark size=2.6pt,black,error bars/.cd,y dir=both,y explicit] coordinates {(0.92,.9884) +- (0,.0006) (1.92,1.0000) +- (0,.0000) (2.92,.9957) +- (0,.0010)};
+\addplot[only marks,mark=square*,mark size=2.4pt,black,error bars/.cd,y dir=both,y explicit] coordinates {(1.08,.9864) +- (0,.0005) (2.08,.0008) +- (0,.0006) (3.08,.7793) +- (0,.2228)};
 \legend{Clean subset,Worst adversarial}
 \end{axis}
 \end{tikzpicture}
-\caption{Clean subset recall versus worst-case adversarial recall (seed means). Error bars are omitted here for legibility and reported in Table~\ref{tab:worst}.}
+\caption{Clean subset recall and worst-case adversarial recall across seeds (mean $\pm$ sample standard deviation). Horizontal offsets prevent overlapping markers; ToN's large adversarial dispersion is visible.}
 \label{fig:gap}
 \end{figure}
 
@@ -164,24 +232,27 @@ Figure~\ref{fig:budget} reports mean recall by attack and budget. CIC degradatio
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}
-\begin{axis}[width=.9\textwidth,height=5.5cm,xlabel={Budget (\%)},ylabel={Mean attack recall},xmin=.8,xmax=5.2,ymin=0,ymax=1.05,xtick={1,3,5},grid=major,legend style={font=\scriptsize,at={(0.5,-0.2)},anchor=north,legend columns=3}]
+\begin{groupplot}[group style={group size=3 by 1,horizontal sep=7mm},width=.31\textwidth,height=4.8cm,xmin=.8,xmax=5.2,xtick={1,3,5},xlabel={Budget (\%)},grid=major,tick label style={font=\scriptsize},label style={font=\scriptsize},title style={font=\small}]
+\nextgroupplot[title={CICIoT2023},ylabel={Mean attack recall},ymin=.9858,ymax=.9884,ytick={.986,.987,.988},legend style={font=\scriptsize,at={(0.5,-.42)},anchor=north,legend columns=2}]
 \addplot[black,mark=*] coordinates {(1,.98794)(3,.98731)(5,.98648)};
 \addplot[black,dashed,mark=square*] coordinates {(1,.98794)(3,.98729)(5,.98643)};
-\addplot[gray,mark=triangle*] coordinates {(1,.91806)(3,.00143)(5,.00092)};
-\addplot[gray,dashed,mark=diamond*] coordinates {(1,.92472)(3,.00142)(5,.00081)};
-\addplot[black!60,mark=o] coordinates {(1,.81210)(3,.83171)(5,.87606)};
-\addplot[black!60,dashed,mark=x] coordinates {(1,.81995)(3,.79582)(5,.79182)};
-\legend{CIC FGSM,CIC PGD,Edge FGSM,Edge PGD,ToN FGSM,ToN PGD}
-\end{axis}
+\legend{FGSM,PGD}
+\nextgroupplot[title={Edge-IIoTset},ymin=0,ymax=1.02,ytick={0,.5,1}]
+\addplot[black,mark=*] coordinates {(1,.91806)(3,.00143)(5,.00092)};
+\addplot[black,dashed,mark=square*] coordinates {(1,.92472)(3,.00142)(5,.00081)};
+\nextgroupplot[title={ToN\_IoT},ymin=.76,ymax=.90,ytick={.78,.82,.86,.90}]
+\addplot[black,mark=*] coordinates {(1,.81210)(3,.83171)(5,.87606)};
+\addplot[black,dashed,mark=square*] coordinates {(1,.81995)(3,.79582)(5,.79182)};
+\end{groupplot}
 \end{tikzpicture}
-\caption{Attack recall versus train-range-relative budget. Lines summarize three seed means; full seed dispersion is retained in the result artifacts.}
+\caption{Attack recall versus train-range-relative budget (three-seed means). Dataset-specific panels avoid compressing CIC and ToN behind Edge's full-range collapse; vertical scales therefore differ and must not be compared visually without their tick labels.}
 \label{fig:budget}
 \end{figure}
 
 FGSM and PGD are similar for CIC and Edge at matched budgets. For ToN, neither dominates across all budgets: PGD recall is 0.0078 higher at 1\%, then 0.0359 and 0.0842 lower at 3\% and 5\%. PGD costs substantially more generation time because it uses 20 projected steps. These comparisons are descriptive; three model seeds do not justify strong inferential claims.
 
 \subsection{Security Gate Decisions}
-Table~\ref{tab:gate} shows the nine decisions. All candidates pass the clean recall floor. The full gate passes all CIC seeds and ToN seeds 123 and 2026, but blocks all Edge seeds and ToN seed 42. Consequently, clean-only evaluation would promote 9/9 candidates, whereas the full policy marks 5/9 as eligible and blocks 4/9. The four changed decisions quantify the gate's added information under this policy and threat model.
+Table~\ref{tab:gate} shows the nine decisions. All candidates pass the clean recall floor. The full gate passes all CIC seeds and ToN seeds 123 and 2026, but blocks all Edge seeds and ToN seed 42. Consequently, clean-only evaluation would mark 9/9 candidates as eligible, whereas the full policy marks 5/9 as eligible and blocks 4/9, a decision-change rate of 44.4\%. This is the direct answer to the research question under the frozen policy: the gate identifies four candidates whose clean evidence alone does not reveal policy-defined insufficient robustness.
 
 \begin{table}[t]
 \caption{Frozen-policy test decisions. RR, ASR, and Drop are robustness criteria.}
@@ -201,14 +272,15 @@ ToN\_IoT & 42/123/2026 & 3 & 2 & 1 & seed-varying & RR, ASR, Drop\\
 
 \begin{figure}[t]
 \centering
-\begin{tikzpicture}[x=1.15cm,y=.62cm]
-\foreach \x/\lab in {0/42,1/123,2/2026}{\node at (\x,3.7){\scriptsize\lab};}
-\foreach \y/\lab in {3/CIC,2/Edge,1/ToN}{\node[anchor=east] at (-.35,\y){\scriptsize\lab};}
-\foreach \x in {0,1,2}{\fill[white] (\x-.35,2.65) rectangle (\x+.35,3.35);\draw (\x-.35,2.65) rectangle (\x+.35,3.35);\node at (\x,3){P};}
-\foreach \x in {0,1,2}{\fill[black!70] (\x-.35,1.65) rectangle (\x+.35,2.35);\draw (\x-.35,1.65) rectangle (\x+.35,2.35);\node[white] at (\x,2){B};}
-\fill[black!70] (-.35,.65) rectangle (.35,1.35);\draw (-.35,.65) rectangle (.35,1.35);\node[white] at (0,1){B};
-\foreach \x in {1,2}{\fill[white] (\x-.35,.65) rectangle (\x+.35,1.35);\draw (\x-.35,.65) rectangle (\x+.35,1.35);\node at (\x,1){P};}
-\node[anchor=west] at (3.0,2.8){\scriptsize P: PASS};\node[anchor=west] at (3.0,2.2){\scriptsize B: BLOCK};
+\begin{tikzpicture}[x=1.25cm,y=.65cm]
+\node[font=\scriptsize] at (1,4.05){Model seed};
+\foreach \x/\lab in {0/42,1/123,2/2026}{\node at (\x,3.65){\scriptsize\lab};}
+\foreach \y/\lab in {3/CICIoT2023,2/Edge-IIoTset,1/ToN\_IoT}{\node[anchor=east] at (-.45,\y){\scriptsize\lab};}
+\foreach \x in {0,1,2}{\fill[white] (\x-.36,2.64) rectangle (\x+.36,3.36);\draw[thick] (\x-.36,2.64) rectangle (\x+.36,3.36);\node[font=\bfseries] at (\x,3){P};}
+\foreach \x in {0,1,2}{\fill[pattern=north east lines] (\x-.36,1.64) rectangle (\x+.36,2.36);\draw[thick] (\x-.36,1.64) rectangle (\x+.36,2.36);\node[font=\bfseries,fill=white,inner sep=1pt] at (\x,2){B};}
+\fill[pattern=north east lines] (-.36,.64) rectangle (.36,1.36);\draw[thick] (-.36,.64) rectangle (.36,1.36);\node[font=\bfseries,fill=white,inner sep=1pt] at (0,1){B};
+\foreach \x in {1,2}{\fill[white] (\x-.36,.64) rectangle (\x+.36,1.36);\draw[thick] (\x-.36,.64) rectangle (\x+.36,1.36);\node[font=\bfseries] at (\x,1){P};}
+\node[anchor=west] at (3.0,2.75){\scriptsize P = PASS};\node[anchor=west] at (3.0,2.15){\scriptsize B = BLOCK};
 \end{tikzpicture}
 \caption{Security Gate decision matrix by dataset and seed. Every model passed clean-only recall; four became BLOCK under the full gate.}
 \label{fig:gate}
@@ -217,49 +289,62 @@ ToN\_IoT & 42/123/2026 & 3 & 2 & 1 & seed-varying & RR, ASR, Drop\\
 Edge's blocks arise from measured robustness criteria, not from its confounding warning: each seed fails robust recall, ASR, and recall-drop thresholds. The warning remains necessary because perfect clean performance may exploit scenario/source associations. ToN's mixed outcome reveals sensitivity to model initialization that its narrow clean standard deviation did not expose.
 
 \subsection{Operational Overhead}
-Table~\ref{tab:time} separates model training from the sum of attack-generation runtimes across six conditions per seed. The reported values exclude data preparation and general orchestration overhead. Edge's larger realized group-preserving subset explains much of its higher adversarial runtime. Gate logic consists of reading six records, applying worst-case reductions, and evaluating Boolean criteria; its cost is negligible relative to attack generation but was not instrumented at sufficient precision for a separate numerical claim.
+Table~\ref{tab:time} separates model training from the sum of attack-generation runtimes across six conditions per seed. Edge's raw suite time is higher because its group-preserving subset contains 80,861 records versus 20,000 for CIC and ToN. Normalizing by sample-condition produces 12.43--13.51 ms per 1,000 records, so the artifacts do not support an efficiency ranking among datasets. The values exclude data preparation, artifact validation, orchestration, and production serving. Adversarial evaluation and gate logic were not instrumented separately at sufficient precision and are not assigned invented costs.
 
 \begin{table}[t]
-\caption{Measured CPU time per seed (seconds, mean $\pm$ standard deviation).}
+\caption{Measured CPU time per seed (mean $\pm$ standard deviation) and workload-normalized attack generation. Each attack suite contains six conditions.}
 \label{tab:time}
-\centering
-\begin{tabular}{lrrr}
+\centering\small
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{lrrrrr}
 \toprule
-Dataset & Training & Six adversarial conditions & Adv./training\\
+Dataset & Subset $N$ & Training (s) & Suite (s) & ms/1k/cond. & Suite/train\\
 \midrule
-CICIoT2023 & $256.66\pm37.74$ & $1.55\pm0.04$ & 0.6\%\\
-Edge-IIoTset & $225.85\pm66.14$ & $6.03\pm1.04$ & 2.7\%\\
-ToN\_IoT & $46.47\pm7.87$ & $1.62\pm0.19$ & 3.5\%\\
+CICIoT2023 & 20,000 & $256.66\pm37.74$ & $1.55\pm0.04$ & 12.92 & 0.6\%\\
+Edge-IIoTset & 80,861 & $225.85\pm66.14$ & $6.03\pm1.04$ & 12.43 & 2.7\%\\
+ToN\_IoT & 20,000 & $46.47\pm7.87$ & $1.62\pm0.19$ & 13.51 & 3.5\%\\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \section{Discussion}
-The principal finding is not simply that gradient attacks reduce IDS metrics. It is that a deterministic pre-promotion control changes decisions that clean evaluation alone would accept. Four of nine candidates crossed from clean PASS to security BLOCK. CIC provides the counterexample necessary for interpretation: the gate does not block every model exposed to an attack; all three CIC models retain approximately 0.986 worst-case recall and pass. Edge demonstrates the opposite extreme, while ToN shows seed dependence. The policy therefore distinguishes robustness evidence rather than acting as a proxy for clean performance.
+\paragraph{Decision value beyond clean evaluation.}
+The principal finding is that a deterministic pre-promotion control changes decisions that clean evaluation accepts: four of nine candidates move from clean PASS to security BLOCK. CIC is the necessary counterexample---the gate does not reject every attacked model, because all three CIC candidates retain about 0.986 worst-case recall. Edge shows the opposite outcome, and ToN shows seed dependence despite small clean variation. The policy therefore uses robustness evidence rather than proxying clean performance.
 
-The results align with literature arguing that secure ML operation needs lifecycle-integrated controls \cite{zhang2022secmlops,zhang2026secmlops}. Our evidence adds a concrete promotion decision and audit trail. It also supports the realism concern in adversarial NIDS research \cite{vitorino2023sok}: the attack mask and projection materially define what robustness means. The study deliberately attacks only one conservative feature per dataset. This reduces semantic ambiguity, but the resulting robustness is conditional on that restricted capability. A PASS cannot be generalized to untested mutable features, problem-space packet manipulations, black-box attacks, poisoning, or future traffic shifts.
+This operationalizes SecMLOps traceability \cite{zhang2022secmlops,zhang2026secmlops}: checkpoint, adversarial bundle, policy hash, and reason codes must agree before eligibility changes. It makes one technical decision reviewable without replacing organizational risk management, consistent with the AI RMF distinction between measurement and context-specific tolerance \cite{tabassi2023airmf}.
 
-FGSM and PGD do not admit a simple ranking here. Their matched-budget effects are almost identical for CIC and Edge; for ToN, PGD is stronger at 3\% and 5\% but weaker at 1\%. This differs from an image-domain intuition that more iterations should uniformly produce a stronger attack. Projection, feature scaling, non-convex decision surfaces, and the single-feature mask can all affect the observed path. We report the pattern without assigning causality. More advanced constrained methods \cite{simonetto2024caa} could broaden the comparison, but adding them after viewing test outcomes would violate the frozen protocol.
+\paragraph{Dataset-specific evidence.}
+For CICIoT2023, every seed passes under the TTL-only attack and the mean recall gap is about 0.002. This shows only that the permitted TTL change does not cross the policy; it says nothing about other features, black-box attacks, poisoning, or shift.
 
-Budget response is likewise dataset-specific. CIC degrades slightly and monotonically. Edge collapses by 3\%, suggesting a narrow boundary along standardized UDP timing. ToN's FGSM recall improves as budget increases, while PGD declines. Projection and saturation can make a larger requested budget produce a candidate that is not ordered in effectiveness. This is why the gate uses the worst observed valid condition rather than assuming that the maximum budget is always worst.
+For Edge-IIoTset, perfect clean discrimination coexists with almost complete adversarial collapse, and every seed violates robust-recall, ASR, and degradation limits. Sensitivity along \texttt{udp.time\_delta} is a hypothesis, not a causal result. The audit conclusion \texttt{NO\_DIRECT\_LEAKAGE\_WITH\_DATASET\_CONFOUNDING} says that audited direct channels were absent, not that confounding disappeared. Robustness determines BLOCK; confounding separately limits external interpretation.
 
-Edge demands special caution. Its clean metrics and zero direct-leakage findings coexist with source/scenario association. The adversarial collapse indicates reliance on a perturbable timing dimension within this distribution, but it does not establish how packets would behave across unseen networks. The gate's BLOCK is supported by robustness thresholds; the confounding warning separately limits external interpretation. Keeping those mechanisms distinct prevents a high metric from becoming evidence of universal generalization and prevents a known limitation from being misreported as confirmed leakage.
+For ToN\_IoT, seed 42 is blocked while 123 and 2026 pass. Clean attack recall varies by about one tenth of a percentage point, but worst-case recall spans 0.5228--0.9242. The gate exposes candidate-level instability hidden by clean performance; because optimization paths were not isolated, initialization is not claimed as the sole cause.
 
-Operationally, the added attack-generation time is small compared with training in this CPU experiment, ranging from roughly 0.6\% to 3.5\% of mean training time. These are pre-deployment batch measurements, not online latency. Artifact validation, data loading, and orchestration are not fully represented in the ratio. A production implementation should measure end-to-end pipeline latency, resource contention, and repeated validation frequency.
+\paragraph{Constraints, attacks, and budget response.}
+Zero semantic violations support correct execution of the encoded rules. This agrees with NIDS and tabular studies showing that constraints affect attack effectiveness \cite{alhussien2024constraining,simonetto2024tabularbench}. Our evidence is weaker than Adv-Bot's problem-space reasoning about malicious functionality \cite{debicha2023advbot}: stored feature vectors do not prove realizable traffic.
+
+FGSM and PGD have similar matched-budget effects for CIC and Edge; for ToN, PGD is stronger at 3\% and 5\% but weaker at 1\%. CIC degrades monotonically, Edge collapses between 1\% and 3\%, and ToN FGSM improves with budget. Projection, clipping, scaling, or decision geometry may contribute, but were not isolated. Thus, the gate uses the worst valid observation instead of assuming that the largest budget or iterative attack is strongest. Adaptive constrained methods such as CAA \cite{simonetto2024caa} belong in a future pre-registered protocol.
+
+Defense work offers remediation but answers another question: AIDTF uses adversarial training \cite{xiong2023aidtf}, RAIDS combines reconstruction and ensembles \cite{sarikaya2023raids}, and robust embeddings transfer protection across tabular models \cite{kireev2023embeddings}. The gate selects none of them; it records noncompliance for a later engineering decision.
+
+\paragraph{Operational interpretation.}
+Attack-suite time is 0.6--3.5\% of mean training time, and normalized values are similar despite Edge's larger subset. Attack generation was not dominant in this CPU experiment, but data access, orchestration, failure recovery, and serving were not timed. Production overhead and validation frequency remain deployment-specific.
+
+Clean and adversarial evaluation answer different questions. A frozen gate makes that difference visible when lifecycle state can change. PASS remains conditional on model, data, mask, budgets, and thresholds; BLOCK means policy noncompliance, not universal failure.
 
 \section{Threats to Validity}
-\paragraph{Internal validity.} Deterministic fingerprints, group-aware splits, train-only preprocessing, frozen checkpoints, and per-condition hashes reduce contamination risk. Edge required a parser and semantic correction; the canonical row count, four malformed rows, removed \texttt{tcp.dstport}, and residual exclusions are retained in the audit trail. Nevertheless, mistakes in dataset labels or capture design can remain beyond these controls.
+\paragraph{Internal validity.} Deterministic fingerprints, group-aware splits, train-only preprocessing, frozen checkpoints, and per-condition hashes reduce contamination and post-selection risk. Cross-label fingerprint groups are excluded before splitting. Edge required a parser and semantic correction; the canonical count, four malformed rows, removal of \texttt{tcp.dstport}, and residual exclusions remain in the audit trail. Nevertheless, source labels, capture procedures, or feature extraction may contain errors not detectable by these checks. The large amount of duplication in CIC and scenario association in Edge also mean that zero split overlap is necessary but not sufficient evidence of independent real-world behavior.
 
-\paragraph{Construct validity.} The experiment measures projected feature-space evasion, not verified packet-level attacks on live networks. The one-feature masks are conservative and reproducible, but may under-approximate attacker capability. Conversely, changing a tabular duration or timing value within bounds does not by itself prove that an equivalent packet trace is realizable. Relative train-range budgets also depend on observed extrema. Semantic validity therefore means compliance with the encoded constraints, not complete protocol realization.
+\paragraph{Construct validity.} The experiment measures targeted projected feature-space evasion, not verified packet-level attacks on live networks. The one-feature masks are conservative and reproducible, but likely under-approximate some attackers. Conversely, changing a tabular duration or timing value within bounds does not prove that an equivalent packet trace is realizable while preserving malicious functionality. Train-range-relative budgets depend on observed extrema and do not express equal operational effort across datasets. Semantic validity therefore means compliance with encoded constraints, not complete protocol realization or attacker cost.
 
-\paragraph{External validity.} Three public datasets and one MLP architecture do not cover all networks, models, or attacks. Each dataset is evaluated independently, and no cross-dataset generalization is claimed. Edge's scenario confounding particularly limits transfer claims. Future evaluation should include temporal and cross-site splits, other model families, additional constrained attacks, and problem-space replay.
+\paragraph{External validity.} Three public datasets, one MLP architecture, two white-box attacks, and three budgets do not cover all networks, models, or adversaries. Each dataset is evaluated independently; the study does not estimate a common deployment population. Edge's scenario confounding particularly limits transfer claims, and TableShift's evidence on tabular distribution shift reinforces why in-distribution results should not be generalized automatically \cite{gardner2023tableshift}. Temporal and cross-site data, tree and transformer models, black-box or adaptive attacks, and problem-space replay remain unevaluated.
 
-\paragraph{Conclusion validity.} The three seeds are the only experimental replicates. Mean, standard deviation, and paired differences are therefore descriptive; no significance claim is made. Gate thresholds encode a defensible validation-calibrated policy, not a universal risk tolerance. ToN's seed-sensitive decision shows that promotion evidence should include replication rather than a single run.
+\paragraph{Conclusion validity.} The three model seeds are the only experimental replicates. Means, sample standard deviations, and decision counts are descriptive; samples and attack conditions are not promoted to pseudo-replicates, and no significance claim is made. The 44.4\% decision-change rate characterizes these nine candidates only. Thresholds encode a validation-calibrated policy, not a universal optimum or risk tolerance. Sensitivity analysis reduces arbitrary selection but cannot remove policy dependence. ToN's seed-sensitive result makes replication particularly important.
 
 \section{Conclusions and Future Work}
-An automated adversarial Security Gate identified insufficient robustness that clean evaluation did not expose. Under the frozen projected constrained threat model, all nine models passed the clean recall criterion, but four were blocked after worst-case robustness, ASR, degradation, and integrity checks were applied. CIC remained robust across seeds, Edge was consistently vulnerable despite perfect clean metrics, and ToN was seed-sensitive. The answer to the research question is therefore conditional but affirmative: a reproducible gate can add actionable promotion evidence, provided its threat model, calibration data, and limitations are explicit.
+An automated adversarial Security Gate identified policy-defined insufficient robustness that clean evaluation did not expose. Under the frozen projected constrained threat model, all nine candidates passed clean recall, but four (44.4\%) were blocked after worst-case robustness, ASR, degradation, and integrity checks. CIC remained within every threshold across seeds, Edge was consistently blocked despite perfect clean metrics, and ToN was seed-sensitive. The research question therefore has a conditional affirmative answer: across these three datasets and nine MLP candidates, a reproducible gate adds actionable promotion evidence that clean validation alone omits.
 
-The gate does not guarantee security and PASS is not deployment. Future work should test additional model families and constrained attacks, validate packet-level realizability, evaluate temporal and cross-network shifts, and study whether validation policies remain stable under changing operational risk. Those extensions should preserve the separation between policy calibration and final test evaluation demonstrated here.
+The scope of that answer is defined by a white-box feature-space adversary, one audited feature per dataset, three budgets, two attacks, and validation-derived thresholds. The gate does not guarantee security, and PASS is eligibility rather than deployment. Future work should validate packet-level realizability, expand model families and adaptive constrained attacks, evaluate temporal and cross-network shifts, and test policy stability under changing operational risk. Those extensions should preserve the demonstrated separation between policy calibration and final test evaluation.
 
 \bibliographystyle{splncs04}
 \bibliography{references}

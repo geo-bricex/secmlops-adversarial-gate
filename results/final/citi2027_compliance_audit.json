@@ -14,23 +14,27 @@
   },
   "render": {
     "pdf": "docs/manuscript_citi2027/manuscript_citi2027_anonymous.pdf",
-    "pdf_sha256": "0F83F0F7F160DF9DD7CAACE02EAE98E719CBE13DCDD2E6230E2A6CF57503A43C",
-    "source_sha256": "2598A36B2C16B5219F9E2A45F51358A51C94F8354DE2F5E52BC32647D5D83CF2",
-    "pages": 12,
-    "words_from_pdf_text": 4172,
+    "pdf_sha256": "96E24A7F49073AC1000B77B7D8A378D66B2F5E71DDAD287FE286376A3605B3C5",
+    "source_sha256": "C463D6370480217E1A325D01F581D4D4F17A4BBC9200374D6A4A4A1EEE7C83F3",
+    "pages": 15,
+    "words_from_pdf_text": 5315,
     "page_limit": "12-15 including figures tables and references",
     "pdf_opens": true,
     "unresolved_citations": 0,
     "unresolved_references": 0
   },
   "content": {
-    "tables": 5,
+    "tables": 6,
     "figures": 4,
-    "references": 12,
-    "recent_references_2022_2026": 7,
-    "recent_reference_percentage": 58.3,
+    "references": 24,
+    "recent_references_2022_2026": 19,
+    "recent_reference_percentage": 79.2,
     "all_references_bibliographically_verified": true,
     "phase5_cross_artifact_consistency": "PASS"
+  },
+  "software_validation": {
+    "command": "docker compose run --rm app pytest -q",
+    "result": "18 passed in 36.63s"
   },
   "openreview_form_requirement": "PENDING_CONFIRMATION",
   "automatic_submission_performed": false
