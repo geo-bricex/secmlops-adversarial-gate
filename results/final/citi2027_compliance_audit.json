@@ -1,0 +1,37 @@
+{
+  "status": "PASS_WITH_OPENREVIEW_FORM_CONFIRMATION_PENDING",
+  "verified_on": "2026-09-22",
+  "official_call_url": "https://congresos.uagraria.edu.ec/",
+  "springer_author_instructions_url": "https://link.springer.com/series/558/information-for-authors-and-editors",
+  "language": "English",
+  "title": "Adversarial Security Gate for MLOps Pipelines: A Multi-Dataset Evaluation for IoT/IIoT Intrusion Detection",
+  "proceedings_series": "Communications in Computer and Information Science",
+  "template": {
+    "class": "llncs",
+    "bibliography_style": "splncs04",
+    "source_bundle": "Springer Computer Science Proceedings author template",
+    "fonts_margins_spacing_modified": false
+  },
+  "render": {
+    "pdf": "docs/manuscript_citi2027/manuscript_citi2027_anonymous.pdf",
+    "pdf_sha256": "0F83F0F7F160DF9DD7CAACE02EAE98E719CBE13DCDD2E6230E2A6CF57503A43C",
+    "source_sha256": "2598A36B2C16B5219F9E2A45F51358A51C94F8354DE2F5E52BC32647D5D83CF2",
+    "pages": 12,
+    "words_from_pdf_text": 4172,
+    "page_limit": "12-15 including figures tables and references",
+    "pdf_opens": true,
+    "unresolved_citations": 0,
+    "unresolved_references": 0
+  },
+  "content": {
+    "tables": 5,
+    "figures": 4,
+    "references": 12,
+    "recent_references_2022_2026": 7,
+    "recent_reference_percentage": 58.3,
+    "all_references_bibliographically_verified": true,
+    "phase5_cross_artifact_consistency": "PASS"
+  },
+  "openreview_form_requirement": "PENDING_CONFIRMATION",
+  "automatic_submission_performed": false
+}

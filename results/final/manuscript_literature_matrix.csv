@@ -1,0 +1,13 @@
+study,year,main_contribution,datasets,adversarial_evaluation,semantic_constraints,mlops_integration,promotion_gate,limitations,relevance_to_this_work
+Kreuzberger et al.,2023,"MLOps definition and architecture","industry cases and literature",no,no,yes,no,"not an adversarial IDS evaluation","Defines lifecycle context"
+Zhang and Jaskolka,2022,"SecMLOps paradigm",conceptual,no,no,yes,no,"conceptual rather than experimentally evaluated promotion policy","Motivates lifecycle security integration"
+Zhang et al.,2026,"Comprehensive SecMLOps framework","case illustration",partial,partial,yes,no,"does not evaluate this frozen multi-dataset IDS gate","Recent security-governance comparison"
+Vitorino et al.,2023,"Systematization of realistic adversarial NIDS",multiple literature studies,yes,yes,no,no,"review rather than implemented promotion control","Supports realism and constraint concerns"
+Simonetto et al.,2024,"Constrained adaptive tabular attack",tabular benchmarks,yes,yes,no,no,"general tabular method; not an MLOps IDS gate","Shows material impact of heterogeneous constraints"
+Kireev et al.,2023,"Cost- and utility-aware tabular robustness",three tabular datasets,yes,yes,no,no,"not network-specific promotion governance","Supports attacker-capability framing"
+Neto et al.,2023,"CICIoT2023 dataset and benchmark",CICIoT2023,no,no,no,no,"dataset study rather than security gate","Primary dataset provenance"
+Ferrag et al.,2022,"Edge-IIoTset dataset",Edge-IIoTset,no,no,no,no,"capture/scenario design limits external interpretation","Primary dataset provenance"
+Alsaedi et al.,2020,"ToN_IoT dataset",ToN_IoT,no,no,no,no,"dataset study rather than security gate","Primary dataset provenance"
+Goodfellow et al.,2015,"FGSM",image benchmarks,yes,no,no,no,"unconstrained image-domain threat model","Foundational attack"
+Madry et al.,2018,"Projected-gradient adversarial robustness",image benchmarks,yes,bounded norm only,no,no,"does not encode network semantics","Foundational iterative attack"
+Nicolae et al.,2019,"Adversarial Robustness Toolbox",multiple domains,yes,framework dependent,no,no,"tooling is not itself a promotion policy","Evaluation tooling context"

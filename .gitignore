@@ -45,3 +45,10 @@ results/**/*.duckdb*
 *.ckpt
 .DS_Store
 Thumbs.db
+docs/manuscript_citi2027/*.aux
+docs/manuscript_citi2027/*.bbl
+docs/manuscript_citi2027/*.blg
+docs/manuscript_citi2027/*.fdb_latexmk
+docs/manuscript_citi2027/*.fls
+docs/manuscript_citi2027/*.log
+docs/manuscript_citi2027/*.out

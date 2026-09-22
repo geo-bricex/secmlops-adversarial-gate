@@ -1,0 +1,25 @@
+{
+  "status": "PASS_WITH_OPENREVIEW_FORM_CONFIRMATION_PENDING",
+  "front_matter": {
+    "author": "Anonymous Author 1",
+    "affiliation": "Anonymous Affiliation",
+    "note": "Author information withheld for anonymous review",
+    "real_author_count_known": false
+  },
+  "forbidden_identity_checks": {
+    "real_names": 0,
+    "real_institutions": 0,
+    "cities": 0,
+    "emails": 0,
+    "orcid": 0,
+    "acknowledgements": 0,
+    "identity_revealing_repository_links": 0,
+    "personal_paths": 0
+  },
+  "pdf_metadata": {
+    "author_field_present": false,
+    "identity_data_present": false,
+    "producer": "MiKTeX pdfTeX"
+  },
+  "pending_external_requirement": "Confirm whether the final CITI 2027 OpenReview form requires anonymous placeholders or complete removal of the author block."
+}
