@@ -2,10 +2,27 @@
   "status": "PASS",
   "verified_on": "2026-09-22",
   "front_matter": {
-    "author": "Anonymous Author 1",
-    "affiliation": "Anonymous Affiliation",
-    "note": "Author information withheld for anonymous review",
-    "real_author_count_known": false
+    "authors": [
+      "Anonymous Author 1",
+      "Anonymous Author 2",
+      "Anonymous Author 3",
+      "Anonymous Author 4",
+      "Anonymous Author 5"
+    ],
+    "affiliations": [
+      "Anonymous Affiliation 1",
+      "Anonymous Affiliation 2"
+    ],
+    "provisional_layout_mapping": "Authors 1, 3, 4, 5 to affiliation 1; author 2 to affiliation 2; layout only",
+    "real_author_count_known": true,
+    "real_author_count": 5,
+    "real_affiliation_count": 2
+  },
+  "rendered_layout_verification": {
+    "anonymous_authors": "5/5",
+    "anonymous_affiliations": "2/2",
+    "running_head": "Anonymous Authors",
+    "page_count_after_layout": 15
   },
   "forbidden_identity_checks": {
     "real_names": 0,

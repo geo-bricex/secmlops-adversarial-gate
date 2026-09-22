@@ -5,10 +5,14 @@ This file is an auxiliary reading and build guide. The authoritative manuscript 
 ## Anonymous front matter
 
 - Anonymous Author 1
-- Anonymous Affiliation
-- Author information withheld for anonymous review
+- Anonymous Author 2
+- Anonymous Author 3
+- Anonymous Author 4
+- Anonymous Author 5
+- Anonymous Affiliation 1
+- Anonymous Affiliation 2
 
-The actual number and identity of authors are intentionally not recorded in the anonymous package. The final OpenReview form must be checked in case CITI 2027 requires the author block to be omitted entirely rather than replaced by anonymous placeholders.
+The anonymous package reserves space for the known total of five authors and two affiliations. The provisional layout maps Authors 1, 3, 4, and 5 to Affiliation 1 and Author 2 to Affiliation 2; it does not encode the real institutional mapping. Names, institutions, emails, ORCID identifiers, cities, and correspondence information are intentionally absent. The final OpenReview form must still be checked in case CITI 2027 requires the author block to be omitted entirely rather than replaced by anonymous placeholders.
 
 ## Abstract
 
@@ -17,6 +21,8 @@ Clean-data validation can promote an intrusion-detection model without testing w
 ## Argument and structure
 
 The manuscript follows the sequence problem, knowledge gap, research question, contribution, method, evidence, interpretation, and limitations. Its sections are Introduction, Related Work, Methodology, Results, Discussion, Threats to Validity, and Conclusions and Future Work. Four original vector figures and six tables are generated directly in LaTeX from verified literature and frozen Phase 5 evidence summarized in `results/final/`. The rendered paper contains 24 bibliographically verified references, of which 19 (79.2%) were published from late 2022 through 2026.
+
+The policy audit establishes that the selection implementation reads only validation artifacts and that the serialized policy digest matches every final decision record. Git history also shows that TEST attack artifacts existed before the final policy record. The manuscript therefore calls the policy validation-derived but does not claim prospective preregistration or chronologically blind TEST generation.
 
 ## Reproducible build
 

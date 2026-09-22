@@ -14,14 +14,16 @@
   },
   "render": {
     "pdf": "docs/manuscript_citi2027/manuscript_citi2027_anonymous.pdf",
-    "pdf_sha256": "96E24A7F49073AC1000B77B7D8A378D66B2F5E71DDAD287FE286376A3605B3C5",
-    "source_sha256": "C463D6370480217E1A325D01F581D4D4F17A4BBC9200374D6A4A4A1EEE7C83F3",
+    "pdf_sha256": "D0E62B44F82A3D2950D7C74FA90D28E137547DAFC7CAE7E5941670D633F9980E",
+    "source_sha256": "24655B0E35D8B9B8DAE87F9D16693FB1B1D2905F0DDBB076E9BC4EC2363657DE",
     "pages": 15,
-    "words_from_pdf_text": 5315,
+    "words_from_pdf_text": 5465,
     "page_limit": "12-15 including figures tables and references",
     "pdf_opens": true,
     "unresolved_citations": 0,
-    "unresolved_references": 0
+    "unresolved_references": 0,
+    "overfull_boxes": 0,
+    "pages_visually_inspected": "15/15"
   },
   "content": {
     "tables": 6,
@@ -31,6 +33,17 @@
     "recent_reference_percentage": 79.2,
     "all_references_bibliographically_verified": true,
     "phase5_cross_artifact_consistency": "PASS"
+  },
+  "phase4_policy_verification": {
+    "policy_id": "projected-evasion-ids-v1",
+    "policy_config_sha256": "26886d6ef2c44cf91f5b6234f50b3727376107b1088ea551a21fb9efb03c0aba",
+    "selection_input": "validation_sanity artifacts only",
+    "decision_records_with_matching_policy_digest": "9/9",
+    "test_metrics_source": "held-out per-condition artifacts with validation_sanity=false",
+    "test_attack_artifact_commit": "220de0e (2026-09-21T17:25:57-05:00)",
+    "final_policy_configuration_commit": "3decbd9 (2026-09-21T17:44:47-05:00)",
+    "frozen_policy_and_decision_artifact_commit": "5fae59a (2026-09-21T18:02:16-05:00)",
+    "conclusion": "VALIDATION_INPUTS_AND_POLICY_DECISION_CONSISTENCY_VERIFIED; PROSPECTIVE_FREEZE_BEFORE_TEST_ATTACK_GENERATION_NOT_PROVEN"
   },
   "software_validation": {
     "command": "docker compose run --rm app pytest -q",
